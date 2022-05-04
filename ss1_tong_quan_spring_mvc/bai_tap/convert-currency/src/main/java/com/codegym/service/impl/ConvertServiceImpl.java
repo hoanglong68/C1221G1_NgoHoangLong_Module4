@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ConvertServiceImpl implements IConvertService {
+    private final Integer RATE = 23000;
+
     @Override
     public float convert(float usd) {
-        return usd * 23000;
+        return usd * RATE;
     }
 }
