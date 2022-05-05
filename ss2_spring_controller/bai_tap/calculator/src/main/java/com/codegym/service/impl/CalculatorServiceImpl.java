@@ -25,6 +25,10 @@ public class CalculatorServiceImpl implements ICalculatorService {
                 }
                 break;
             case '*':
+                if (Integer.parseInt(num2) == 0) {
+                    result = "num2 is not 0 !";
+                    break;
+                }
                 try {
                     result = String.valueOf(Integer.parseInt(num1) * Integer.parseInt(num2));
                 } catch (NumberFormatException numberFormatException) {
@@ -32,6 +36,10 @@ public class CalculatorServiceImpl implements ICalculatorService {
                 }
                 break;
             case '/':
+                if (Integer.parseInt(num2) == 0) {
+                    result = "num2 is not 0 !";
+                    break;
+                }
                 try {
                     result = String.valueOf(Float.parseFloat(num1) / Float.parseFloat(num2));
                 } catch (NumberFormatException numberFormatException) {
