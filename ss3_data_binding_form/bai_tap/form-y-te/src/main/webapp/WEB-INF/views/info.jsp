@@ -11,18 +11,19 @@
     <title>thông tin</title>
 </head>
 <body>
-<form action="edit">
-<h1>thông tin tờ khai</h1>
-<p>Năm sinh: ${yTe.ten}</p>
-<p>Họ tên: ${yTe.namSinh}</p>
-<p>Quốc tịch: ${yTe.quocTich}</p>
-<p>Hộ Chiếu: ${yTe.cmnd}</p>
-<p>Thông tin đi lại: ${yTe.phuongTien}</p>
-<p>Số hiệu phương tiện: ${yTe.soHieuPhuongTien}</p>
-<p>Số ghế: ${yTe.soGhe}</p>
-<p>Ngày khởi hành: ${yTe.ngayKhoiHanh}</p>
-<p>Ngày kết thúc: ${yTe.ngayKetThuc}</p>
-<p>tỉnh/ thành phố đã đến: ${yTe.diaDiem}</p>
+<form action="edit" method="post">
+    <input type="hidden" name="medical" value="${medical}">
+    <h1>thông tin tờ khai</h1>
+    <p>Năm sinh: ${medical.ten}</p>
+    <p>Họ tên: ${medical.namSinh}</p>
+    <p>Quốc tịch: ${medical.quocTich}</p>
+    <p>Hộ Chiếu: ${medical.cmnd}</p>
+    <p>Thông tin đi lại: ${medical.phuongTien}</p>
+    <p>Số hiệu phương tiện: ${medical.soHieuPhuongTien}</p>
+    <p>Số ghế: ${medical.soGhe}</p>
+    <p>Ngày khởi hành: ${medical.ngayKhoiHanh}</p>
+    <p>Ngày kết thúc: ${medical.ngayKetThuc}</p>
+    <p>tỉnh/ thành phố đã đến: ${medical.diaDiem}</p>
     <input type="submit" value="chỉnh sửa thông tin">
 </form>
 </body>
