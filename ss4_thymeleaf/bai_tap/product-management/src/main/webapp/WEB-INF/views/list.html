@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+</head>
+<body>
+<h1>Product List</h1>
+<h2 th:text="${message}" class="text-success"></h2>
+<button><a href="/create">Create new product</a></button>
+<table class="table">
+    <thead class="table-dark">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Manufacturer</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product,loop : ${productList}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.manufacturer}"></td>
+        <td>
+            <button type="button" class="btn btn-warning" th:href="@{/edit(id=${product.id})}">Edit</button>
+        </td>
+        <td>
+<!--            <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#deleteModal">-->
+<!--                Delete-->
+<!--            </button>-->
+            <button type="button" class="btn btn-danger" ><a th:href="@{/delete(id=${product.id})}">Delete</a></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="deleteModalLabel">Delete Product</h5>-->
+<!--                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">...</div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>-->
+<!--                <button type="button" class="btn btn-primary">Delete it !</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>
