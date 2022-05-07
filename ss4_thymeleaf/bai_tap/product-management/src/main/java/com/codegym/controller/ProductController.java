@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ProductController {
     @Autowired
-    IProductService iProductService;
+    private IProductService iProductService;
 
     @GetMapping(value = "/list")
     public String goList(Model model) {
