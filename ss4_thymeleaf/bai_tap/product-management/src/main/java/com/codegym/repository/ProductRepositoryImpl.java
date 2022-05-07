@@ -23,16 +23,34 @@ public class ProductRepositoryImpl implements IProductRepository {
 
     @Override
     public void createProduct(Product product) {
+        product.setId(String.valueOf(Math.round(Math.random() * 1000)));
         productList.add(product);
     }
 
     @Override
     public Product findProductById(String id) {
-        return productList.get(Integer.parseInt(id));
+        Product product = null;
+        for (Product value : productList) {
+            if (value.getId().equals(id)) {
+                product = value;
+                break;
+            }
+        }
+        return product;
     }
 
     @Override
     public void removeProduct(Product product) {
         productList.remove(product);
+    }
+
+    @Override
+    public void saveProduct(Product product) {
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getId().equals(product.getId())) {
+                productList.set(i, product);
+                break;
+            }
+        }
     }
 }

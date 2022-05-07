@@ -8,10 +8,10 @@
 <body>
 <h1>Create Product</h1>
 <form action="create" method="post" th:object="${product}">
-    <div>
-        Id:
-        <input th:value="${id}" disabled>
-    </div>
+<!--    <div>-->
+<!--        Id:-->
+<!--        <input th:value="${id}" disabled th:field="*{id}">-->
+<!--    </div>-->
     <div>
         Name:
         <input type="text" th:field="*{name}">

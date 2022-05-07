@@ -31,4 +31,9 @@ public class ProductServiceImpl implements IProductService {
     public void removeProduct(Product product) {
         iProductRepository.removeProduct(product);
     }
+
+    @Override
+    public void saveProduct(Product product) {
+        iProductRepository.saveProduct(product);
+    }
 }

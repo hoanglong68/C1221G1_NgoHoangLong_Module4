@@ -1,5 +1,7 @@
 package com.codegym.model;
 
+import java.util.Objects;
+
 public class Product {
     String id;
     String name;
@@ -8,13 +10,6 @@ public class Product {
     String manufacturer;
 
     public Product() {
-    }
-
-    public Product(String name, String price, String description, String manufacturer) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.manufacturer = manufacturer;
     }
 
     public Product(String id, String name, String price, String description, String manufacturer) {
@@ -63,5 +58,16 @@ public class Product {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", price='" + price + '\'' +
+                ", description='" + description + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                '}';
     }
 }
