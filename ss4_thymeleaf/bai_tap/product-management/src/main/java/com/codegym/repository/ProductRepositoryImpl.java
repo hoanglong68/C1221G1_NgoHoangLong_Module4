@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public class ProductRepositoryImpl implements IProductRepository {
-    public static List<Product> productList = new ArrayList<>();
+    private static List<Product> productList = new ArrayList<>();
 
     static {
         productList.add(new Product("1", "long", "30000", "dep trai", "vn"));
@@ -52,5 +52,16 @@ public class ProductRepositoryImpl implements IProductRepository {
                 break;
             }
         }
+    }
+
+    @Override
+    public List<Product> findProductByName(String search) {
+        List<Product> productFindList = new ArrayList<>();
+        for (Product value : productList) {
+            if (value.getName().contains(search)) {
+                productFindList.add(value);
+            }
+        }
+        return productFindList;
     }
 }

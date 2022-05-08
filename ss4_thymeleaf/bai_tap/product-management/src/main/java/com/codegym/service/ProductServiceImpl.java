@@ -36,4 +36,9 @@ public class ProductServiceImpl implements IProductService {
     public void saveProduct(Product product) {
         iProductRepository.saveProduct(product);
     }
+
+    @Override
+    public List<Product> findProductByName(String search) {
+        return iProductRepository.findProductByName(search);
+    }
 }

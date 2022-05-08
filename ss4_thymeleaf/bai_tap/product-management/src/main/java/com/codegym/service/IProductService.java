@@ -14,4 +14,6 @@ public interface IProductService {
     void removeProduct(Product product);
 
     void saveProduct(Product product);
+
+    List<Product> findProductByName(String search);
 }

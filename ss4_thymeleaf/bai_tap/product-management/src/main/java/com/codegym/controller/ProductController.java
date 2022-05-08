@@ -31,7 +31,6 @@ public class ProductController {
     @PostMapping(value = "/create")
     public String createProduct(@ModelAttribute Product product,
                                 RedirectAttributes redirectAttributes) {
-        System.out.println(product);
         this.iProductService.createProduct(product);
         redirectAttributes.addFlashAttribute("message", "create successful !");
         return "redirect:/list";
@@ -64,9 +63,23 @@ public class ProductController {
     @PostMapping(value = "/edit")
     public String editProduct(@ModelAttribute Product product,
                               RedirectAttributes redirectAttributes) {
-        System.out.println(product);
         this.iProductService.saveProduct(product);
         redirectAttributes.addFlashAttribute("message", "edit successful !");
         return "redirect:/list";
+    }
+
+    @GetMapping(value = "/detail")
+    public String detailProduct(Model model,
+                                @RequestParam String id) {
+        model.addAttribute("product", this.iProductService.findProductById(id));
+        return "detail";
+    }
+
+    @GetMapping(value = "/search")
+    public String searchProduct(Model model,
+                                @RequestParam(value = "nameProduct") String name) {
+        System.out.println(this.iProductService.findProductByName(name));
+        model.addAttribute("productList", this.iProductService.findProductByName(name));
+        return "list";
     }
 }

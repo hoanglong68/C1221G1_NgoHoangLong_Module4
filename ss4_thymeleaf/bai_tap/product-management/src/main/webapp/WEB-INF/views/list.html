@@ -6,9 +6,21 @@
     <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
 </head>
 <body>
-<h1>Product List</h1>
+<h1><a href="/list">Product List</a></h1>
 <h2 th:text="${message}" class="text-success"></h2>
 <button><a href="/create">Create new product</a></button>
+<hr>
+<form action="/search" method="get">
+    <div class="input-group">
+        <div class="form-outline">
+            <input type="search" id="form1" class="form-control" name="nameProduct"/>
+            <label class="form-label" for="form1">Search by name</label>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</form>
 <table class="table">
     <thead class="table-dark">
     <tr>
@@ -17,6 +29,7 @@
         <th>Price</th>
         <th>Description</th>
         <th>Manufacturer</th>
+        <th>Detail</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -28,6 +41,11 @@
         <td th:text="${product.price}"></td>
         <td th:text="${product.description}"></td>
         <td th:text="${product.manufacturer}"></td>
+        <td>
+            <button type="button" class="btn btn-primary"><a th:href="@{/detail(id=${product.id})}"
+                                                             style="color: white">Detail</a>
+            </button>
+        </td>
         <td>
             <button type="button" class="btn btn-warning"><a th:href="@{/edit(id=${product.id})}" style="color: white">Edit</a>
             </button>

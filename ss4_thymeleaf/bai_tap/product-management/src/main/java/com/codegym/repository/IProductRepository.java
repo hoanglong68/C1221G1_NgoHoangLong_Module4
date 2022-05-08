@@ -14,4 +14,6 @@ public interface IProductRepository {
     void removeProduct(Product product);
 
     void saveProduct(Product product);
+
+    List<Product> findProductByName(String search);
 }
