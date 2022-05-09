@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @PostMapping(value = "/create")
-    public String createProduct(@ModelAttribute Product product,
+    public String createProduct( Product product,
                                 RedirectAttributes redirectAttributes) {
         this.iProductService.createProduct(product);
         redirectAttributes.addFlashAttribute("message", "create successful !");
@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @PostMapping(value = "/delete")
-    public String deleteProduct(@ModelAttribute Product product,
+    public String deleteProduct( Product product,
                                 RedirectAttributes redirectAttributes) {
         System.out.println(product);
         this.iProductService.removeProduct(this.iProductService.findProductById(product.getId()));
@@ -61,7 +61,7 @@ public class ProductController {
     }
 
     @PostMapping(value = "/edit")
-    public String editProduct(@ModelAttribute Product product,
+    public String editProduct( Product product,
                               RedirectAttributes redirectAttributes) {
         this.iProductService.saveProduct(product);
         redirectAttributes.addFlashAttribute("message", "edit successful !");
