@@ -1,9 +1,13 @@
 package com.codegym.model;
 
-import java.util.Objects;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "product")
 public class Product {
-    String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
     String name;
     String price;
     String description;
@@ -12,7 +16,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String id, String name, String price, String description, String manufacturer) {
+    public Product(Integer id, String name, String price, String description, String manufacturer) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -20,11 +24,11 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
