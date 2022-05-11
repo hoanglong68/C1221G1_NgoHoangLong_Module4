@@ -4,7 +4,6 @@ package com.codegym.model;
 import lombok.Data;
 
 import javax.persistence.*;
-
 @Data
 @Entity
 @Table
@@ -19,4 +18,5 @@ public class Blog {
     @ManyToOne
     @JoinColumn(name = "id_category", referencedColumnName = "id")
     private Category category;
+
 }
