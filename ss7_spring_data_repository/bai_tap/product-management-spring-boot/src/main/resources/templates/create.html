@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+</head>
+<body>
+<h1>Create Product</h1>
+<form action="create" method="post" th:object="${product}">
+<!--    <div>-->
+<!--        Id:-->
+<!--        <input th:value="${id}" disabled th:field="*{id}">-->
+<!--    </div>-->
+    <div>
+        Name:
+        <input type="text" th:field="*{name}">
+    </div>
+    <div>
+        Price:
+        <input type="number" th:field="*{price}">
+    </div>
+    <div>
+        Description:
+        <input type="text" th:field="*{description}">
+    </div>
+    <div>
+        Manufacturer:
+        <input type="text" th:field="*{manufacturer}">
+    </div>
+    <div>
+        <input type="submit" value="create new product">
+    </div>
+    <div>
+        <button><a href="/list">Back to List</a></button>
+    </div>
+</form>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>
