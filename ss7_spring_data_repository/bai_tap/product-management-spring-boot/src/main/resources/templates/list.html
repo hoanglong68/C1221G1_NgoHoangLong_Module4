@@ -10,11 +10,19 @@
 <h2 th:text="${message}" class="text-success"></h2>
 <button><a href="/create">Create new product</a></button>
 <hr>
-<form action="/search" method="get">
+<form action="/list" method="get">
     <div class="input-group">
         <div class="form-outline">
             <input type="search" id="form1" class="form-control" name="nameProduct"/>
-            <label class="form-label" for="form1">Search by name</label>
+            <label class="form-label" for="form1">Search by Name</label>
+        </div>
+        <div class="form-outline">
+            <input type="search" id="form2" class="form-control" name="nameDescription"/>
+            <label class="form-label" for="form1">Search by Description</label>
+        </div>
+        <div class="form-outline">
+            <input type="search" id="form3" class="form-control" name="nameManufacturer"/>
+            <label class="form-label" for="form1">Search by Manufacturer</label>
         </div>
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-search"></i>
@@ -61,7 +69,7 @@
     <ul class="pagination">
         <li class="page-item">
             <a class="page-link" th:if="${productList.hasPrevious()}"
-               th:href="@{/list(page=${productList.number - 1}, keyword=${keywordVal})}">Previous</a>
+               th:href="@{/list(page=${productList.number - 1}, keyword=${keywordVal1},keyword=${keywordVal2},keyword=${keywordVal3})}">Previous</a>
         </li>
         <li class="page-link">
             <span th:text="${productList.number + 1}"></span>
@@ -70,7 +78,7 @@
         </li>
         <li class="page-item">
             <a class="page-link" th:if="${productList.hasNext()}"
-               th:href="@{/list(page=${productList.number + 1}, keyword=${keywordVal})}">Next</a>
+               th:href="@{/list(page=${productList.number + 1}, keyword=${keywordVal1},keyword=${keywordVal2},keyword=${keywordVal3})}">Next</a>
         </li>
     </ul>
 </nav>

@@ -21,12 +21,18 @@ public class ProductController {
 
     @GetMapping(value = "/list")
     public String goList(Model model,
+                         @RequestParam(value = "nameProduct") Optional<String> nameProduct,
+                         @RequestParam(value = "nameDescription") Optional<String> nameDescription,
+                         @RequestParam(value = "nameManufacturer") Optional<String> nameManufacturer,
                          @PageableDefault(value = 2) Pageable pageable
-            , @RequestParam Optional<String> name
     ) {
-        String keyword = name.orElse("");
-        model.addAttribute("keywordVal", keyword);
-        model.addAttribute("productList", this.iProductService.getProductList(keyword,pageable));
+        String keyword1 = nameProduct.orElse("");
+        String keyword2 = nameDescription.orElse("");
+        String keyword3 = nameManufacturer.orElse("");
+        model.addAttribute("keywordVal1", keyword1);
+        model.addAttribute("keywordVal2", keyword2);
+        model.addAttribute("keywordVal3", keyword3);
+        model.addAttribute("productList", this.iProductService.getProductList(keyword1, keyword2, keyword3, pageable));
         return "list";
     }
 
@@ -73,12 +79,4 @@ public class ProductController {
         model.addAttribute("product", this.iProductService.findProductById(Integer.parseInt(id)));
         return "detail";
     }
-
-//    @GetMapping(value = "/search")
-//    public String searchProduct(Model model,
-//                                @RequestParam(value = "nameProduct") String name) {
-//        System.out.println(this.iProductService.findProductByName(name));
-//        model.addAttribute("productList", this.iProductService.findProductByName(name));
-//        return "list";
-//    }
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+</head>
+<body>
+<h1 style="text-align: center">Register</h1>
+<div class="w-50 mx-auto shadow-2-strong p-4">
+    <form method="post" th:action="@{/register}" th:object="${userDto}">
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+        <input type="hidden" th:field="*{id}">
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <input type="text" id="form3Example1" class="form-control" th:field="*{firstName}"/>
+                    <label class="form-label" for="form3Example1">First name</label>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color: red"></p>
+            <div class="col">
+                <div class="form-outline">
+                    <input type="text" id="form3Example2" class="form-control" th:field="*{lastName}"/>
+                    <label class="form-label" for="form3Example2">Last name</label>
+                </div>
+                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color: red"></p>
+            </div>
+        </div>
+        <div class="form-outline mb-4">
+            <input type="number" id="form3Example3" class="form-control" th:field="*{phoneNumber}"/>
+            <label class="form-label" for="form3Example3">Phone Number</label>
+        </div>
+        <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" style="color: red"></p>
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <input type="number" id="form3Example4" class="form-control" th:field="*{age}"/>
+            <label class="form-label" for="form3Example4">Age</label>
+        </div>
+        <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color: red"></p>
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input type="text" id="form3Example5" class="form-control" th:field="*{email}"/>
+            <label class="form-label" for="form3Example5">Email</label>
+        </div>
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red"></p>
+
+        <!-- Checkbox -->
+        <!--    <div class="form-check d-flex justify-content-center mb-4">-->
+        <!--        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />-->
+        <!--        <label class="form-check-label" for="form2Example33">-->
+        <!--            Subscribe to our newsletter-->
+        <!--        </label>-->
+        <!--    </div>-->
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+
+        <!-- Register buttons -->
+        <!--    <div class="text-center">-->
+        <!--        <p>or sign up with:</p>-->
+        <!--        <button type="button" class="btn btn-primary btn-floating mx-1">-->
+        <!--            <i class="fab fa-facebook-f"></i>-->
+        <!--        </button>-->
+
+        <!--        <button type="button" class="btn btn-primary btn-floating mx-1">-->
+        <!--            <i class="fab fa-google"></i>-->
+        <!--        </button>-->
+
+        <!--        <button type="button" class="btn btn-primary btn-floating mx-1">-->
+        <!--            <i class="fab fa-twitter"></i>-->
+        <!--        </button>-->
+
+        <!--        <button type="button" class="btn btn-primary btn-floating mx-1">-->
+        <!--            <i class="fab fa-github"></i>-->
+        <!--        </button>-->
+        <!--    </div>-->
+    </form>
+</div>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>

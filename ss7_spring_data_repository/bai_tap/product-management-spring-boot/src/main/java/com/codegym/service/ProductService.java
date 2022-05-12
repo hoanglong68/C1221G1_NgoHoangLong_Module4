@@ -14,9 +14,15 @@ public class ProductService implements IProductService {
     @Autowired
     private IProductRepository iProductRepository;
 
+//    @Override
+//    public Page<Product> getProductList(String name, Pageable pageable) {
+//        return iProductRepository.findAllByNameContainingOrderByNameAsc(name, pageable);
+//    }
+
     @Override
-    public Page<Product> getProductList(String name, Pageable pageable) {
-        return iProductRepository.findAllByNameContainingOrderByNameAsc(name, pageable);
+    public Page<Product> getProductList(String name, String description, String manufacturer, Pageable pageable) {
+        return iProductRepository.findAllByNameContainingAndDescriptionContainingAndManufacturerContainingOrderByNameAsc
+                (name, description, manufacturer, pageable);
     }
 
     @Override

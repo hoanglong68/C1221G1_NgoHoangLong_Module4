@@ -3,6 +3,7 @@ package com.codegym.model;
 import lombok.Data;
 
 import javax.persistence.*;
+
 @Data
 @Entity
 @Table(name = "product")

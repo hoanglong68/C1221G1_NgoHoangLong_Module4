@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>layout</title>
+</head>
+<body>
+<!--<th:block th:replace="~{layout :: top-bootstrap}"></th:block>-->
+<!--<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>-->
+<th:block th:fragment="top-bootstrap">
+
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
+            rel="stylesheet"
+    />
+
+    <!-- MDB -->
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
+    ></script>
+</th:block>
+<th:block th:fragment="bot-bootstrap">
+    <!-- MDB -->
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
+    ></script>
+</th:block>
+
+<form th:object="${blog}" th:method="post" th:action="@{/blog/edit}">
+    <fieldset class="w-75 mx-auto">
+        <legend class="text-center my-4"> <span class="text-secondary">Create blog</span></legend>
+        <div>
+            <input type="hidden" th:field="*{id}" value="0" disabled>
+        </div>
+
+        <div class="form-outline w-25 mx-auto">
+            <input class="form-control" id="name1" type="text" th:field="*{name}"/>
+            <label class="form-label" for="name1">Tên bài viết</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="price1" type="text" th:field="*{author}"/>
+            <label class="form-label" for="price1">Tên tác giả</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <textarea class="form-control" id="desc1" type="text" th:field="*{content}"></textarea>
+            <label class="form-label" for="desc1">Nhập nộp dung</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select th:field="*{category}" class="form-select" aria-label="Disabled select example" >
+                <option value="0" th:text="--Chọn--"></option>
+                <option th:each="categorys: ${category}" th:value="${categorys.id}" th:text="${categorys.name}"></option>
+            </select>
+        </div>
+
+    </fieldset>
+    <div class="text-center">
+        <button type="submit" class="btn btn-secondary mt-4 mx-2">Add New</button>
+        <button type="button" class="btn btn-warning mt-4 mx-2">Cancel</button>
+    </div>
+
+</form>
+<div class="text-center">
+    <a class="btn btn-light mt-4 " th:href="@{/blog/}">Back to Blog List</a>
+</div>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>
