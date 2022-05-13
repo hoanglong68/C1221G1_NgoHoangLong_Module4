@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public String registerUser(@ModelAttribute @Validated UserDto userDto,
+    public String registerUser( @Validated UserDto userDto,
                                BindingResult bindingResult,
                                Model model) {
         new UserDto().validate(userDto, bindingResult);

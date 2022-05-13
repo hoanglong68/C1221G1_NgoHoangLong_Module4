@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Song List</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+</head>
+<body >
+<h1  class="bg-primary text-center text-center text-light">Song List</h1>
+<h2 th:text="${message}" class="bg-success text-center"></h2>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/view">Song List</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/create}">Create</a>
+                </li>
+            </ul>
+            <form class="d-flex input-group w-auto">
+                <input
+                        type="search"
+                        class="form-control"
+                        placeholder="search by"
+                        aria-label="Search"
+                />
+                <button
+                        class="btn btn-outline-primary"
+                        type="button"
+                        data-mdb-ripple-color="dark"
+                >
+                    Search
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<table class="table">
+    <thead class="table-dark p-3">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name Song</th>
+        <th scope="col">Name Singer</th>
+        <th scope="col">Type Song</th>
+        <th scope="col">Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="song,loop : ${songList}">
+        <th scope="row" th:text="${loop.count}"></th>
+        <td th:text="${song.nameSong}"></td>
+        <td th:text="${song.nameSinger}"></td>
+        <td th:text="${song.typeSong}"></td>
+        <td>
+            <a class="btn btn-warning" th:href="@{/edit(id=${song.id})}">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>

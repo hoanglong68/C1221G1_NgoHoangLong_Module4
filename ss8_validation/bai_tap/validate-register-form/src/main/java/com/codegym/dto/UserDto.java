@@ -19,8 +19,7 @@ public class UserDto implements Validator {
 
     private String phoneNumber;
 
-    @NotNull(message = "non")
-    private Integer age;
+    private String age;
     @NotEmpty(message = "must be not empty")
     @Email(message = "email must be depend on form: ...@..dot...")
     private String email;
@@ -36,8 +35,12 @@ public class UserDto implements Validator {
         if (!userDto.phoneNumber.matches("^\\d{10}$")) {
             errors.rejectValue("phoneNumber", "phoneNumber.size");
         }
-        if (userDto.age < 18 ) {
-            errors.rejectValue("age", "age.check","giang");
+        try {
+            if (Integer.parseInt(userDto.age) < 18) {
+                errors.rejectValue("age", "age.check18");
+            }
+        } catch (NumberFormatException numberFormatException) {
+            errors.rejectValue("age", "age.checkFormat");
         }
     }
 }
