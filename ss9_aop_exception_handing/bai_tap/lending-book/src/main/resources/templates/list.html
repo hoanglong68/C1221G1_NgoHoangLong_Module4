@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+</head>
+<body>
+<h1 class="text-center bg-light">Book List</h1>
+<h2 th:text="${message}" class="bg-success text-center"></h2>
+<table class="table w-75 mx-auto shadow-2-strong">
+    <thead class="table-dark p-3">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name Book</th>
+        <th scope="col">Author</th>
+        <th scope="col">number of books remaining</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book,loop : ${bookList}">
+        <th scope="row" th:text="${loop.count}"></th>
+        <td th:text="${book.nameBook}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.quantity}"></td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/detail(idBook=${book.idBook})}">Show Detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>

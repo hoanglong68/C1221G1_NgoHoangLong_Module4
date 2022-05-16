@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Detail</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+
+</head>
+<body>
+<h1 class="text-center bg-light">Book Detail</h1>
+<div class="mx-auto text-center">
+    <div>
+        Name:
+        <h3 th:text="${book.nameBook}">
+        </h3>
+    </div>
+    <div>
+        Author:
+        <h3 th:text="${book.author}">
+        </h3>
+    </div>
+    <div>
+        number of books remaining:
+        <h3 th:text="${book.quantity}">
+        </h3>
+    </div>
+    <div>
+        <form action="/giveBack">
+            <div>
+                code book lend:
+                <input type="number" name="idBookLend">
+            </div>
+            <input type="submit" class="btn btn-secondary" value="Give Back Book !">
+        </form>
+        <form action="/lend">
+            <input type="hidden" name="idBook" th:value="${book.idBook}">
+            <input type="submit" class="btn btn-secondary" value="Lend Book !">
+        </form>
+    </div>
+    <a class="btn btn-light" th:href="@{/list}">Back to List</a>
+</div>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+
+</body>
+</html>

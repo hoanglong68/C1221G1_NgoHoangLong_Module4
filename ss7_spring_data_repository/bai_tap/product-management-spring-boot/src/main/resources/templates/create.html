@@ -7,27 +7,33 @@
 </head>
 <body>
 <h1>Create Product</h1>
-<form action="create" method="post" th:object="${product}">
-<!--    <div>-->
-<!--        Id:-->
-<!--        <input th:value="${id}" disabled th:field="*{id}">-->
-<!--    </div>-->
+<form action="create" method="post" th:object="${productDto}">
+    <!--    <div>-->
+    <!--        Id:-->
+    <!--        <input th:value="${id}" disabled th:field="*{id}">-->
+    <!--    </div>-->
     <div>
         Name:
         <input type="text" th:field="*{name}">
     </div>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></p>
     <div>
         Price:
         <input type="number" th:field="*{price}">
     </div>
+    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color: red"></p>
+
     <div>
         Description:
         <input type="text" th:field="*{description}">
     </div>
+    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color: red"></p>
+
     <div>
         Manufacturer:
         <input type="text" th:field="*{manufacturer}">
     </div>
+    <p th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}" style="color: red"></p>
     <div>
         <input type="submit" value="create new product">
     </div>

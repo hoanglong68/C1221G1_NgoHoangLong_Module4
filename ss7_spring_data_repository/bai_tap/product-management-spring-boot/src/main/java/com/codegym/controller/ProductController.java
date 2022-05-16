@@ -1,12 +1,16 @@
 package com.codegym.controller;
 
+import com.codegym.dto.ProductDto;
 import com.codegym.model.Product;
 import com.codegym.service.IProductService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,16 +42,25 @@ public class ProductController {
 
     @GetMapping(value = "/create")
     public String goCreateForm(Model model) {
-        model.addAttribute("product", new Product());
+        model.addAttribute("productDto", new ProductDto());
         return "create";
     }
 
     @PostMapping(value = "/create")
-    public String createProduct(Product product,
+    public String createProduct(@Validated ProductDto productDto,
+                                BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes) {
-        this.iProductService.saveProduct(product);
-        redirectAttributes.addFlashAttribute("message", "create successful !");
-        return "redirect:/list";
+//        new ProductDto().validate(productDto, bindingResult);
+        productDto.validate(productDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            return "create";
+        } else {
+            Product product = new Product();
+            BeanUtils.copyProperties(productDto, product);
+            this.iProductService.saveProduct(product);
+            redirectAttributes.addFlashAttribute("message", "create successful !");
+            return "redirect:/list";
+        }
     }
 
     @PostMapping(value = "/delete")

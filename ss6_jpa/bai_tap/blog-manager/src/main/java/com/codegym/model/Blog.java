@@ -18,5 +18,4 @@ public class Blog {
     @ManyToOne
     @JoinColumn(name = "id_category", referencedColumnName = "id")
     private Category category;
-
 }
