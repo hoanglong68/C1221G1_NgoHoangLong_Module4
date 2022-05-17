@@ -18,7 +18,7 @@ public class LogAspect {
     public void allMethodPointCut() {
     }
 
-    @Pointcut("execution(* com.codegym.controller.BookController.go*(..))")
+    @Pointcut("execution(* com.codegym.controller.BookController.do*(..))")
     public void crudMethodPointCut() {
     }
 

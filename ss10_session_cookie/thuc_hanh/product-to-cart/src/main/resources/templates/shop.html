@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+
+</head>
+<body>
+<h1 class="text-center mx-auto">Welcome to Long Shop !</h1>
+<div class="d-flex flex-row-reverse"><a href="/shopping-cart" class="btn btn-dark"><i class="fas fa-shopping-cart"></i></a>
+</div>
+<div class="row mx-3">
+    <div class="card-group col-3" th:each="product: ${products}">
+        <div class="card m-4"><img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
+                                   alt="Hollywood Sign on The Hill"/>
+            <div class="card-body"><h4 class="card-title text-truncate">Name : <span class="text-secondary"
+                                                                                     th:text="${product.name}"></span>
+            </h4>
+                <p class="card-text text-warning"> Price : <span th:text="${product.price}"></span></p>
+                <p class="card-text text-warning"> Description: <small class="text-success"
+                                                                       th:text="${product.description}"></small></p>
+                <div class="card-footer px-0"><a class="btn btn-success mx-4"><i class="fas fa-shopping-cart"> Add to cart</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>

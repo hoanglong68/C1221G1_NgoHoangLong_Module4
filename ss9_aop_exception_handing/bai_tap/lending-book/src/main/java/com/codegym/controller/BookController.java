@@ -32,7 +32,7 @@ public class BookController {
     }
 
     @GetMapping(value = "/lend")
-    public String lendBook(@RequestParam String idBook, Model model,
+    public String doLendBook(@RequestParam String idBook, Model model,
                            RedirectAttributes redirectAttributes) {
         Book book = this.iBookService.findById(idBook);
         if (book.getQuantity() <= 0) {
@@ -57,7 +57,7 @@ public class BookController {
     }
 
     @GetMapping(value = "/giveBack")
-    public String giveBackBook(
+    public String doGiveBackBook(
             @RequestParam String idBookLend,
             Model model,
             RedirectAttributes redirectAttributes) {
