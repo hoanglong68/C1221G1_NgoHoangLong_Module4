@@ -20,6 +20,7 @@ public class ProductController {
     public Cart setupCart() {
         return new Cart();
     }
+
     @GetMapping("/shop")
     public ModelAndView showShop() {
         ModelAndView modelAndView = new ModelAndView("/shop");
@@ -28,16 +29,29 @@ public class ProductController {
     }
 
     @GetMapping("/add/{id}")
-    public String addToCart(@PathVariable Long id, @ModelAttribute Cart cart, @RequestParam("action") String action) {
-        Optional<Product> productOptional = iProductService.findById(id);
-        if (!productOptional.isPresent()) {
+    public String addToCart(@PathVariable Long id, @SessionAttribute Cart cart,
+                            @RequestParam Optional<String> action) {
+        System.out.println(action);
+        Product product = iProductService.findById(id).orElse(null);
+        if (product == null) {
             return "/error";
         }
-        if (action.equals("show")) {
-            cart.addProduct(productOptional.get());
+        if (action.isPresent()) {
+            cart.addProduct(product);
             return "redirect:/shopping-cart";
         }
-        cart.addProduct(productOptional.get());
+        cart.addProduct(product);
         return "redirect:/shop";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteFromCart(@PathVariable Long id, @SessionAttribute Cart cart) {
+        Product product = iProductService.findById(id).orElse(null);
+        if (product == null) {
+            return "/error";
+        } else {
+            cart.deleteProduct(product);
+            return "redirect:/shopping-cart";
+        }
     }
 }

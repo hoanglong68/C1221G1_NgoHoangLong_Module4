@@ -20,7 +20,8 @@
                 <p class="card-text text-warning"> Price : <span th:text="${product.price}"></span></p>
                 <p class="card-text text-warning"> Description: <small class="text-success"
                                                                        th:text="${product.description}"></small></p>
-                <div class="card-footer px-0"><a class="btn btn-success mx-4"><i class="fas fa-shopping-cart"> Add to cart</i></a>
+                <div class="card-footer px-0"><a class="btn btn-success mx-4" th:href="@{/add/{id}(id=${product.id})}"><i
+                        class="fas fa-shopping-cart"> Add to cart</i></a>
                 </div>
             </div>
         </div>
