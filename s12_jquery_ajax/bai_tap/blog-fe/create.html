@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Blog</title>
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<script rel="stylesheet" src="jquery/jquery-3.6.0.min.js"></script>
+<h1 style="text-align: center">Create Blog</h1>
+<form method="post" action="/create">
+    <fieldset class="w-75 mx-auto">
+        <legend class="text-center my-4"><span class="text-secondary">Create blog</span></legend>
+        <div class="form-outline w-25 mx-auto">
+            <input class="form-control" id="name" type="text"/>
+            <label class="form-label" for="name">Name Blog</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="content" type="text"/>
+            <label class="form-label" for="content">Content Blog</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <textarea class="form-control" id="content-summary" type="text"></textarea>
+            <label class="form-label" for="content-summary">Summary Content</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select class="form-select" aria-label="Disabled select example" id="categoryDto">
+                <option value="0"></option>
+                <option></option>
+            </select>
+        </div>
+
+    </fieldset>
+    <div class="text-center">
+        <button type="submit" class="btn btn-secondary mt-4 mx-2">Add New</button>
+        <a class="btn btn-warning mt-4 mx-2" href="create.html">Cancel</a>
+    </div>
+</form>
+<div class="text-center">
+    <a class="btn btn-light mt-4 " href="home.html">Back to Blog List</a>
+</div>
+<script>
+$("#create-blog").click(function () {
+let inputName = $("#name").val();
+let inputContent = $("#content").val();
+let inputContentSummary = $("#content-summary").val();
+let inputIdCategoryDto = $("#categoryDto").val();
+    let blogDto = {
+        "name": inputName,
+        "content": inputContent,
+        "summaryContent": inputContentSummary,
+        "categoryDto": {
+            "id": inputIdCategoryDto
+        }
+    }
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: "POST", //GET, DELETE, PUT...
+        url: "http://localhost:8080/blogRest/create",
+        data: JSON.stringify(blogDto),
+        success: function(resultSuccess){
+            alert("OK");
+        },
+        error: function(resultError) {
+            console.log(resultError);
+            $("#pError").text(resultError.responseJSON[0].defaultMessage);
+        }
+    });
+})
+</script>
+<!--MDB-->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
+></script>
+</body>
+</html>
