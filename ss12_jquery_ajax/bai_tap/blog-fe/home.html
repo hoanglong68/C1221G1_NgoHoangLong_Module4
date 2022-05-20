@@ -56,6 +56,22 @@
 </nav>
 <div class="row mx-3" id="bodyBlog">
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="detail-blog"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script rel="stylesheet" src="jquery/jquery-3.6.0.min.js"></script>
 <script>
@@ -100,15 +116,19 @@
     <div class="card-body"><h4 class="card-title text-truncate">Name :
     <span class="text-secondary">${blogDto.name}</span>
     </h4>
+    <input type="hidden" id="get-name" value="1">
         <p class="card-text text-warning"> Content : <span>${blogDto.content}</span></p>
         <p class="card-text text-warning"> Category:
         <small class="text-success">${blogDto.category.name}</small></p>
-        <div class="card-footer px-0"><button class="btn btn-success mx-4" id="view-content"
-                                         href="#">View Content</button>
+        <div class="card-footer px-0">
+        <button type="button" class="btn btn-success mx-4" data-mdb-toggle="modal" data-mdb-target="#exampleModal"
+        id="get-detail" value="1">
+  View Content
+        </button>
         </div>
     </div>
-</div>
-  </div>`;
+    </div>
+ </div>`;
                 }
                 $("#bodyBlog").html(outHTML);
                 $("#pageNumber").text(curPage + 1 + " / " + totalPage);
@@ -128,6 +148,7 @@
             }
         });
     }
+
     $("#aNext").click(function () {
         curPage++;
         getPageBlog(curPage);
@@ -136,7 +157,11 @@
         curPage--;
         getPageBlog(curPage);
     });
-
+    $("#get-detail").click(function () {
+       let blogDtoDetail = $("#get-name").val();
+       console.log(blogDtoDetail);
+        $("#detail-blog").text(blogDtoDetail);
+    });
 </script>
 <!--MDB-->
 <script
