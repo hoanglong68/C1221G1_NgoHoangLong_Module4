@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+    <th:block th:replace="~{layout :: css}"></th:block>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+</head>
+<body>
+<h1 class="text-center text-light mx-auto">FURAMA RESORT MANAGEMENT</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">Employee</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Furama</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/customer/list}">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/employee/list}">Employee</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <i class="fas fa-plus"><a th:href="@{/employee/create}"> New Employee</a></i>
+    <form class="d-flex input-group w-auto">
+        <input
+                type="search"
+                class="form-control"
+                placeholder="Type query"
+                aria-label="Search"
+        />
+        <button
+                class="btn btn-outline-primary"
+                type="button"
+                data-mdb-ripple-color="dark"
+        >
+            Search
+        </button>
+    </form>
+</nav>
+<h2 class="text-center text-dark mx-auto">EMPLOYEE LIST</h2>
+<nav aria-label="Page navigation example">
+    <ul class="pagination mx-auto justify-content-center text-center">
+        <li class="page-item">
+            <a class="page-link" th:if="${employeeList.hasPrevious()}"
+               th:href="@{/employee/list(page=${employeeList.number - 1})}">Previous</a>
+        </li>
+        <li class="page-link">
+            <span th:text="${employeeList.number + 1}"></span>
+            /
+            <span th:text="${employeeList.totalPages}"></span>
+        </li>
+        <li class="page-item">
+            <a class="page-link" th:if="${employeeList.hasNext()}"
+               th:href="@{/employee/list(page=${employeeList.number + 1})}">Next</a>
+        </li>
+    </ul>
+    <!--    keyword=${keywordVal1}-->
+</nav>
+<div class="container">
+    <table class="table w-75 mx-auto shadow-2-strong">
+        <thead class="table-dark p-3">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date of birth</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Id Card</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Customer Type</th>
+            <th scope="col" colspan="2" class="text-center">Function</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee,loop : ${employeeList}">
+            <th scope="row" th:text="${loop.count}"></th>
+            <td th:text="${employee.employeeName}"></td>
+            <td th:text="${employee.employeeDateOfBirth}"></td>
+            <th:block th:if="${employee.employeeGender == 1}">
+                <th>Male</th>
+            </th:block>
+            <th:block th:if="${employee.customerGender == 0}">
+                <th>Female</th>
+            </th:block>
+            <td th:text="${employee.customerIdCard}"></td>
+            <td th:text="${employee.customerPhone}"></td>
+            <td th:text="${employee.customerEmail}"></td>
+            <td th:text="${employee.customerAddress}"></td>
+            <td th:text="${employee.customerType.customerTypeName}"></td>
+            <td>
+                <a class="btn btn-warning" th:href="@{/employee/edit(id=${employee.employeeId})}">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-warning" data-mdb-toggle="modal" data-mdb-target="#exampleModal"
+                   th:attr="onclick=|deleteModal('${employee.employeeId}', '${employee.employeeName}')|">
+                    Delete
+                </a>
+                <!--            <button th:attr="onclick=|deleteModal('${blog.id}', '${blog.name}')|"-->
+                <!--                    type="button" class="btn btn-warning" data-mdb-toggle="modal" data-mdb-target="#deleteModal">-->
+                <!--                Delete-->
+                <!--            </button>-->
+            </td>
+            <!--        <td>-->
+            <!--            <a class="btn btn-primary" th:href="@{/detail(idBook=${book.idBook})}">Show Detail</a>-->
+            <!--        </td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer class="text-center text-white" style="background-color: #21081a;">
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-white" href="#">hoang long</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" th:action="@{/employee/delete}">
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="get-id">
+                    <h1 style="color: black" id="get-name">
+                        Name employee:
+                    </h1>
+                    <hr>
+                    <p>Are You Sure ???</p>
+                    <p style="color: red">this action cant not revert</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete It !</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function deleteModal(id, name) {
+        document.getElementById("get-id").value = id;
+        document.getElementById("get-name").innerText = name;
+    }
+</script>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>
