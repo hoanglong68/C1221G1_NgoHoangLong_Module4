@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Employee</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+</head>
+<body>
+<form th:object="${employeeDto}" method="post" th:action="@{/employee/create}">
+    <fieldset class="w-75 mx-auto">
+        <legend class="text-center my-4"><span class="text-secondary">Create New Customer</span></legend>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="name" type="text" th:field="*{employeeName}"/>
+            <label class="form-label" for="name">Name</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="dob" type="date" th:field="*{employeeDateOfBirth}"/>
+            <label class="form-label" for="dob">Date Of Birth</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="id-card" type="text" th:field="*{employeeIdCard}"/>
+            <label class="form-label" for="id-card">Id Card</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="salary" type="text" th:field="*{employeeSalary}"/>
+            <label class="form-label" for="salary">Salary</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="phone" type="text" th:field="*{employeePhone}"/>
+            <label class="form-label" for="phone">Phone</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="email" type="text" th:field="*{employeeEmail}"/>
+            <label class="form-label" for="email">Email</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="address" type="text" th:field="*{employeeAddress}"/>
+            <label class="form-label" for="address">Address</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select th:field="*{position}" class="form-select" aria-label="Disabled select example">
+                <option value="" th:text="--select--"></option>
+                <option th:each="position: ${positionList}"
+                        th:value="${position.positionId}"
+                        th:text="${position.positionName}">
+                </option>
+            </select>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select th:field="*{division}" class="form-select" aria-label="Disabled select example">
+                <option value="0" th:text="--select--"></option>
+                <option th:each="division: ${divisionList}"
+                        th:value="${division.divisionId}"
+                        th:text="${division.divisionName}">
+                </option>
+            </select>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select th:field="*{educationDegree}" class="form-select" aria-label="Disabled select example">
+                <option value="0" th:text="--select--"></option>
+                <option th:each="educationDegree: ${educationDegreeList}"
+                        th:value="${educationDegree.educationDegreeId}"
+                        th:text="${educationDegree.educationDegreeName}">
+                </option>
+            </select>
+        </div>
+    </fieldset>
+    <div class="text-center">
+        <button type="submit" class="btn btn-secondary mt-4 mx-2">Add New</button>
+        <input class="btn btn-warning me-4" type="reset" value="cancel">
+    </div>
+</form>
+<div class="text-center">
+    <a class="btn btn-light mt-4 " th:href="@{/Employee/list}">Back to Employee List</a>
+</div>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>

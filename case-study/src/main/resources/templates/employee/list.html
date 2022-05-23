@@ -79,12 +79,14 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Date of birth</th>
-            <th scope="col">Gender</th>
             <th scope="col">Id Card</th>
+<!--            <th scope="col">Salary</th>-->
             <th scope="col">Phone</th>
             <th scope="col">Email</th>
             <th scope="col">Address</th>
-            <th scope="col">Customer Type</th>
+            <th scope="col">Position</th>
+            <th scope="col">Education Degree</th>
+            <th scope="col">Division</th>
             <th scope="col" colspan="2" class="text-center">Function</th>
         </tr>
         </thead>
@@ -93,17 +95,14 @@
             <th scope="row" th:text="${loop.count}"></th>
             <td th:text="${employee.employeeName}"></td>
             <td th:text="${employee.employeeDateOfBirth}"></td>
-            <th:block th:if="${employee.employeeGender == 1}">
-                <th>Male</th>
-            </th:block>
-            <th:block th:if="${employee.customerGender == 0}">
-                <th>Female</th>
-            </th:block>
-            <td th:text="${employee.customerIdCard}"></td>
-            <td th:text="${employee.customerPhone}"></td>
-            <td th:text="${employee.customerEmail}"></td>
-            <td th:text="${employee.customerAddress}"></td>
-            <td th:text="${employee.customerType.customerTypeName}"></td>
+            <td th:text="${employee.employeeIdCard}"></td>
+<!--            <td th:text="${employee.employeeSalary}"></td>-->
+            <td th:text="${employee.employeePhone}"></td>
+            <td th:text="${employee.employeeEmail}"></td>
+            <td th:text="${employee.employeeAddress}"></td>
+            <td th:text="${employee.position.positionName}"></td>
+            <td th:text="${employee.educationDegree.educationDegreeName}"></td>
+            <td th:text="${employee.division.divisionName}"></td>
             <td>
                 <a class="btn btn-warning" th:href="@{/employee/edit(id=${employee.employeeId})}">Edit</a>
             </td>
@@ -112,14 +111,7 @@
                    th:attr="onclick=|deleteModal('${employee.employeeId}', '${employee.employeeName}')|">
                     Delete
                 </a>
-                <!--            <button th:attr="onclick=|deleteModal('${blog.id}', '${blog.name}')|"-->
-                <!--                    type="button" class="btn btn-warning" data-mdb-toggle="modal" data-mdb-target="#deleteModal">-->
-                <!--                Delete-->
-                <!--            </button>-->
             </td>
-            <!--        <td>-->
-            <!--            <a class="btn btn-primary" th:href="@{/detail(idBook=${book.idBook})}">Show Detail</a>-->
-            <!--        </td>-->
         </tr>
         </tbody>
     </table>
@@ -137,7 +129,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete Employee</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="post" th:action="@{/employee/delete}">

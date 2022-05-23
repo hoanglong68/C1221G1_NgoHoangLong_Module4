@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/customer")
 public class CustomerController {
     @Autowired
-    ICustomerService iCustomerService;
+    private ICustomerService iCustomerService;
     @Autowired
-    ICustomerTypeService iCustomerTypeService;
+    private ICustomerTypeService iCustomerTypeService;
 
     @GetMapping(value = "list")
     public String goListCustomer(Model model, @PageableDefault(value = 4) Pageable pageable) {
@@ -28,7 +28,7 @@ public class CustomerController {
 
     @GetMapping(value = "create")
     public String goCreateForm(Model model) {
-        model.addAttribute("customer", new CustomerDto());
+        model.addAttribute("customerDto", new CustomerDto());
         model.addAttribute("customerTypeList", this.iCustomerTypeService.findAll());
         return "/customer/create";
     }
@@ -53,8 +53,7 @@ public class CustomerController {
     }
 
     @PostMapping(value = "edit")
-    public String doEditCustomer(@ModelAttribute CustomerDto customerDto) {
-        System.out.println(customerDto.getCustomerId());
+    public String doEditCustomer(CustomerDto customerDto) {
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
         this.iCustomerService.save(customer);

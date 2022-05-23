@@ -1,13 +1,11 @@
-package com.codegym.model;
+package com.codegym.dto;
 
-import javax.persistence.*;
+import com.codegym.model.Division;
+import com.codegym.model.EducationDegree;
+import com.codegym.model.Position;
 
-@Entity
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EmployeeDto {
     private Integer employeeId;
-
     private String employeeName;
     private String employeeDateOfBirth;
     private String employeeIdCard;
@@ -15,36 +13,11 @@ public class Employee {
     private String employeePhone;
     private String employeeEmail;
     private String employeeAddress;
-
-    @ManyToOne
-    @JoinColumn(name = "position_id", referencedColumnName = "positionId")
     private Position position;
-
-    @ManyToOne
-    @JoinColumn(name = "division_id", referencedColumnName = "divisionId")
     private Division division;
-
-    @ManyToOne
-    @JoinColumn(name = "education_degree_id", referencedColumnName = "educationDegreeId")
     private EducationDegree educationDegree;
 
-    public Division getDivision() {
-        return division;
-    }
-
-    public void setDivision(Division division) {
-        this.division = division;
-    }
-
-    public EducationDegree getEducationDegree() {
-        return educationDegree;
-    }
-
-    public void setEducationDegree(EducationDegree educationDegree) {
-        this.educationDegree = educationDegree;
-    }
-
-    public Employee() {
+    public EmployeeDto() {
     }
 
     public Integer getEmployeeId() {
@@ -117,5 +90,21 @@ public class Employee {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Division getDivision() {
+        return division;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
+    }
+
+    public EducationDegree getEducationDegree() {
+        return educationDegree;
+    }
+
+    public void setEducationDegree(EducationDegree educationDegree) {
+        this.educationDegree = educationDegree;
     }
 }
