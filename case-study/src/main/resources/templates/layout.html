@@ -44,15 +44,9 @@
     />
     <!-- MDB -->
     <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css"
             rel="stylesheet"
     />
-
-    <!-- MDB -->
-    <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
-    ></script>
 </th:block>
 <th:block th:fragment="nav-bar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -80,6 +74,27 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/employee/list}">Employee</a>
                     </li>
+                    <!-- Navbar dropdown -->
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                id="navbarDropdown"
+                                role="button"
+                                data-mdb-toggle="dropdown"
+                                aria-expanded="false"
+                        >
+                            Service
+                        </a>
+                        <!-- Dropdown menu -->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" th:href="@{/service/list}">List</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/service/create}">Create</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -89,7 +104,7 @@
     <!-- MDB -->
     <script
             type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.js"
     ></script>
 </th:block>
 </body>

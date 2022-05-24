@@ -45,6 +45,9 @@ public class CustomerController {
     public String goEditForm(Model model,
                              @RequestParam String id) {
         Customer customer = this.iCustomerService.findById(id);
+        if (customer == null) {
+            return "error";
+        }
         CustomerDto customerDto = new CustomerDto();
         BeanUtils.copyProperties(customer, customerDto);
         model.addAttribute("customerDto", customerDto);
@@ -63,6 +66,9 @@ public class CustomerController {
     @PostMapping(value = "delete")
     public String doDeleteCustomer(@RequestParam String id) {
         Customer customer = this.iCustomerService.findById(id);
+        if (customer == null) {
+            return "error";
+        }
         this.iCustomerService.delete(customer);
         return "redirect:/customer/list";
     }

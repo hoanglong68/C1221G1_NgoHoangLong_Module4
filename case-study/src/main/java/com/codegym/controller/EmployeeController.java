@@ -1,7 +1,6 @@
 package com.codegym.controller;
 
 import com.codegym.dto.EmployeeDto;
-import com.codegym.model.Customer;
 import com.codegym.model.Employee;
 import com.codegym.service.IDivisionService;
 import com.codegym.service.IEducationDegreeService;
@@ -60,6 +59,9 @@ public class EmployeeController {
     public String goEditForm(Model model,
                              @RequestParam String id) {
         Employee employee = this.iEmployeeService.findById(id);
+        if (employee == null) {
+            return "error";
+        }
         EmployeeDto employeeDto = new EmployeeDto();
         BeanUtils.copyProperties(employee, employeeDto);
         model.addAttribute("employeeDto", employeeDto);
@@ -80,6 +82,9 @@ public class EmployeeController {
     @PostMapping(value = "/delete")
     public String doDeleteEmployee(@RequestParam String id) {
         Employee employee = this.iEmployeeService.findById(id);
+        if (employee == null) {
+            return "error";
+        }
         this.iEmployeeService.delete(employee);
         return "redirect:/employee/list";
     }

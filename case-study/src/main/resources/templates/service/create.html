@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Service</title>
+    <th:block th:replace="~{layout :: css}"></th:block>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+</head>
+<body>
+<h1 class="text-center text-light mx-auto">FURAMA RESORT MANAGEMENT</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">Service</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Furama</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/customer/list}">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/employee/list}">Employee</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Info -->
+<form th:object="${serviceDto}" method="post" th:action="@{/service/create}">
+    <fieldset class="w-75 mx-auto">
+        <legend class="text-center my-4"><span class="text-secondary">Create New Service</span></legend>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="name" type="text" th:field="*{serviceName}"/>
+            <label class="form-label" for="name">Name</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="area" type="date" th:field="*{serviceArea}"/>
+            <label class="form-label" for="area">Area</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="cost" type="text" th:field="*{serviceCost}"/>
+            <label class="form-label" for="cost">Cost</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="capacity" type="text" th:field="*{serviceMaxPeople}"/>
+            <label class="form-label" for="capacity">Max People</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="standard" type="text" th:field="*{standardRoom}"/>
+            <label class="form-label" for="standard">Standard Room</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="doc" type="text" th:field="*{descriptionOtherConvenience}"/>
+            <label class="form-label" for="doc">Description Other Convenience</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4" id="input-pool">
+            <input class="form-control" id="pool" type="text" th:field="*{poolArea}"/>
+            <label class="form-label" for="pool">Pool Area</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4" id="input-floors">
+            <input class="form-control" id="floors" type="text" th:field="*{numberOfFloors}"/>
+            <label class="form-label" for="floors">Number Of Floors</label>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select th:field="*{facilityType}" class="form-select" aria-label="Disabled select example"
+                    id="select-facility">
+                <option value="0" th:text="--select--"></option>
+                <option th:each="facilityType: ${facilityTypeList}"
+                        th:value="${facilityType.facilityTypeId}"
+                        th:text="${facilityType.facilityTypeName}">
+                </option>
+            </select>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select th:field="*{rentType}" class="form-select" aria-label="Disabled select example">
+                <option value="0" th:text="--select--"></option>
+                <option th:each="rentType: ${rentTypeList}"
+                        th:value="${rentType.rentTypeId}"
+                        th:text="${rentType.rentTypeName}"></option>
+            </select>
+        </div>
+    </fieldset>
+    <div class="text-center">
+        <button type="submit" class="btn btn-secondary mt-4 mx-2">Add New</button>
+        <input class="btn btn-warning me-4" type="reset" value="cancel">
+    </div>
+</form>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $("#select-facility").change(function () {
+            if (this.value == 3) {
+                $("#input-pool").hide();
+                $("#input-pool").find("input").prop("disabled",true);
+                $("#input-floors").hide();
+                $("#input-floors").find("input").prop("disabled",true);
+            } else if (this.value == 2) {
+                $("#input-pool").hide();
+                $("#input-pool").find("input").prop("disabled",true);
+                $("#input-floors").show();
+                $("#input-floors").find("input").prop("disabled",false);
+            } else if (this.value == 1) {
+                $("#input-pool").show();
+                $("#input-pool").find("input").prop("disabled",false);
+                $("#input-floors").show();
+                $("#input-floors").find("input").prop("disabled",false);
+            }
+        });
+    });
+</script>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+</body>
+</html>

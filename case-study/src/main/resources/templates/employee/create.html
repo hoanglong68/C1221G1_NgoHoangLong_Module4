@@ -8,7 +8,7 @@
 <body>
 <form th:object="${employeeDto}" method="post" th:action="@{/employee/create}">
     <fieldset class="w-75 mx-auto">
-        <legend class="text-center my-4"><span class="text-secondary">Create New Customer</span></legend>
+        <legend class="text-center my-4"><span class="text-secondary">Create New Employee</span></legend>
         <div class="form-outline w-25 mx-auto my-4">
             <input class="form-control" id="name" type="text" th:field="*{employeeName}"/>
             <label class="form-label" for="name">Name</label>
@@ -71,7 +71,7 @@
     </div>
 </form>
 <div class="text-center">
-    <a class="btn btn-light mt-4 " th:href="@{/Employee/list}">Back to Employee List</a>
+    <a class="btn btn-light mt-4 " th:href="@{/employee/list}">Back to Employee List</a>
 </div>
 <th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
 </body>
