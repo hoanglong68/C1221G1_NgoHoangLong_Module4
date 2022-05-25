@@ -10,7 +10,7 @@
 <h1 class="text-center text-light mx-auto">FURAMA RESORT MANAGEMENT</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand">Service</a>
+        <a class="navbar-brand">SERVICE</a>
         <button
                 class="navbar-toggler"
                 type="button"
@@ -33,6 +33,12 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/employee/list}">Employee</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/service/list}">Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contract/list}">Contract</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -46,15 +52,15 @@
             <label class="form-label" for="name">Name</label>
         </div>
         <div class="form-outline w-25 mx-auto my-4">
-            <input class="form-control" id="area" type="date" th:field="*{serviceArea}"/>
+            <input class="form-control" id="area" type="number" th:field="*{serviceArea}"/>
             <label class="form-label" for="area">Area</label>
         </div>
         <div class="form-outline w-25 mx-auto my-4">
-            <input class="form-control" id="cost" type="text" th:field="*{serviceCost}"/>
+            <input class="form-control" id="cost" type="number" th:field="*{serviceCost}"/>
             <label class="form-label" for="cost">Cost</label>
         </div>
         <div class="form-outline w-25 mx-auto my-4">
-            <input class="form-control" id="capacity" type="text" th:field="*{serviceMaxPeople}"/>
+            <input class="form-control" id="capacity" type="number" th:field="*{serviceMaxPeople}"/>
             <label class="form-label" for="capacity">Max People</label>
         </div>
         <div class="form-outline w-25 mx-auto my-4">
@@ -66,11 +72,11 @@
             <label class="form-label" for="doc">Description Other Convenience</label>
         </div>
         <div class="form-outline w-25 mx-auto my-4" id="input-pool">
-            <input class="form-control" id="pool" type="text" th:field="*{poolArea}"/>
+            <input class="form-control" id="pool" type="number" th:field="*{poolArea}"/>
             <label class="form-label" for="pool">Pool Area</label>
         </div>
         <div class="form-outline w-25 mx-auto my-4" id="input-floors">
-            <input class="form-control" id="floors" type="text" th:field="*{numberOfFloors}"/>
+            <input class="form-control" id="floors" type="number" th:field="*{numberOfFloors}"/>
             <label class="form-label" for="floors">Number Of Floors</label>
         </div>
         <div class="form-outline w-25 mx-auto my-4">

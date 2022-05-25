@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping(value = "/employee")
 public class EmployeeController {
@@ -33,8 +35,29 @@ public class EmployeeController {
     private IEducationDegreeService iEducationDegreeService;
 
     @GetMapping(value = "/list")
-    public String goListEmployee(Model model, @PageableDefault(value = 4) Pageable pageable) {
-        model.addAttribute("employeeList", this.iEmployeeService.findAll(pageable));
+    public String goListEmployee(Model model,
+                                 @RequestParam Optional<String> nameQuery,
+                                 @RequestParam Optional<String> addressQuery,
+                                 @RequestParam Optional<String> positionQuery,
+                                 @RequestParam Optional<String> educationDegreeQuery,
+                                 @RequestParam Optional<String> divisionQuery,
+                                 @PageableDefault(value = 4) Pageable pageable) {
+        String keyword1 = nameQuery.orElse("");
+        String keyword2 = addressQuery.orElse("");
+        String keyword3 = positionQuery.orElse("");
+        String keyword4 = educationDegreeQuery.orElse("");
+        String keyword5 = divisionQuery.orElse("");
+        model.addAttribute("keywordVal1", keyword1);
+        model.addAttribute("keywordVal2", keyword2);
+        model.addAttribute("keywordVal3", keyword3);
+        model.addAttribute("keywordVal4", keyword4);
+        model.addAttribute("keywordVal5", keyword5);
+        model.addAttribute("positionList", this.iPositionService.findAll());
+        model.addAttribute("divisionList", this.iDivisionService.findAll());
+        model.addAttribute("educationDegreeList", this.iEducationDegreeService.findAll());
+        model.addAttribute("employeeList",
+                this.iEmployeeService.findAllByProperties
+                        (keyword1,keyword2,keyword3,keyword4,keyword5,pageable));
         return "/employee/list";
     }
 

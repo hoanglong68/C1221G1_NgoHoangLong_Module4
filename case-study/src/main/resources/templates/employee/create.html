@@ -3,9 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Employee</title>
+    <th:block th:replace="~{layout :: css}"></th:block>
+
     <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
 </head>
 <body>
+<h1 class="text-center text-light mx-auto">FURAMA RESORT MANAGEMENT</h1>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">EMPLOYEE</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Furama</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/customer/list}">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/employee/list}">Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/service/list}">Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contract/list}">Contract</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <i class="fas fa-plus"><a th:href="@{/employee/create}"> New Employee</a></i>
+    <form class="d-flex input-group w-auto">
+        <input
+                type="search"
+                class="form-control"
+                placeholder="Type query"
+                aria-label="Search"
+        />
+        <button
+                class="btn btn-outline-primary"
+                type="button"
+                data-mdb-ripple-color="dark"
+        >
+            Search
+        </button>
+    </form>
+</nav>
+
 <form th:object="${employeeDto}" method="post" th:action="@{/employee/create}">
     <fieldset class="w-75 mx-auto">
         <legend class="text-center my-4"><span class="text-secondary">Create New Employee</span></legend>

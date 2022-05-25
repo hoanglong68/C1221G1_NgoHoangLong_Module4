@@ -13,10 +13,6 @@ public class EmployeeService implements IEmployeeService {
     @Autowired
     private IEmployeeRepository iEmployeeRepository;
 
-    @Override
-    public Page<Employee> findAll(Pageable pageable) {
-        return iEmployeeRepository.findAll(pageable);
-    }
 
     @Override
     public void save(Employee employee) {
@@ -31,5 +27,35 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public void delete(Employee employee) {
         iEmployeeRepository.delete(employee);
+    }
+
+    @Override
+    public Page<Employee> findAllByProperties
+            (String keyword1, String keyword2, String keyword3, String keyword4, String keyword5, Pageable pageable) {
+        if ("".equals(keyword3) && "".equals(keyword4) && "".equals(keyword5)) {
+            return iEmployeeRepository.findAllByEmployeeNameContainingAndEmployeeAddressContaining
+                    (keyword1, keyword2, pageable);
+        } else if (!"".equals(keyword3) && "".equals(keyword4) && "".equals(keyword5)) {
+            return iEmployeeRepository.findAllByEmployeeNameContainingAndEmployeeAddressContainingAndPosition_PositionId
+                    (keyword1, keyword2, Integer.parseInt(keyword3), pageable);
+        } else if ("".equals(keyword3) && !"".equals(keyword4) && "".equals(keyword5)) {
+            return iEmployeeRepository.findAllByEmployeeNameContainingAndEmployeeAddressContainingAndEducationDegree_EducationDegreeId
+                    (keyword1, keyword2, Integer.parseInt(keyword4), pageable);
+        } else if ("".equals(keyword3) && "".equals(keyword4) && !"".equals(keyword5)) {
+            return iEmployeeRepository.findAllByEmployeeNameContainingAndEmployeeAddressContainingAndDivision_DivisionId
+                    (keyword1, keyword2, Integer.parseInt(keyword5), pageable);
+        } else if (!"".equals(keyword3) && !"".equals(keyword4) && "".equals(keyword5)) {
+            return iEmployeeRepository.findAllByEmployeeNameContainingAndEmployeeAddressContainingAndPosition_PositionIdAndEducationDegree_EducationDegreeId
+                    (keyword1, keyword2, Integer.parseInt(keyword3), Integer.parseInt(keyword4), pageable);
+        } else if (!"".equals(keyword3) && "".equals(keyword4) && !"".equals(keyword5)) {
+            return iEmployeeRepository.findAllByEmployeeNameContainingAndEmployeeAddressContainingAndPosition_PositionIdAndDivision_DivisionId
+                    (keyword1, keyword2, Integer.parseInt(keyword3), Integer.parseInt(keyword5), pageable);
+        } else if ("".equals(keyword3) && !"".equals(keyword4) && !"".equals(keyword5)) {
+            return iEmployeeRepository.findAllByEmployeeNameContainingAndEmployeeAddressContainingAndEducationDegree_EducationDegreeIdAndDivision_DivisionId
+                    (keyword1, keyword2, Integer.parseInt(keyword4), Integer.parseInt(keyword5), pageable);
+        } else {
+            return iEmployeeRepository.findAllByEmployeeNameContainingAndEmployeeAddressContainingAndPosition_PositionIdAndEducationDegree_EducationDegreeIdAndDivision_DivisionId
+                    (keyword1, keyword2, Integer.parseInt(keyword3), Integer.parseInt(keyword4), Integer.parseInt(keyword5), pageable);
+        }
     }
 }

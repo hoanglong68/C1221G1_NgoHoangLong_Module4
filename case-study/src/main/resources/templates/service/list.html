@@ -8,7 +8,102 @@
 </head>
 <body>
 <h1 class="text-center text-light mx-auto">FURAMA RESORT MANAGEMENT</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">SERVICE</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Furama</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/customer/list}">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/employee/list}">Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/service/list}">Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contract/list}">Contract</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <i class="fas fa-plus"><a th:href="@{/service/create}"> New Service</a></i>
+</nav>
+<h2 class="text-center text-dark mx-auto">SERVICE LIST</h2>
+<nav aria-label="Page navigation example">
+    <ul class="pagination mx-auto justify-content-center text-center">
+        <li class="page-item">
+            <a class="page-link" th:if="${serviceList.hasPrevious()}"
+               th:href="@{/service/list(page=${serviceList.number - 1})}">Previous</a>
+        </li>
+        <li class="page-link">
+            <span th:text="${serviceList.number + 1}"></span>
+            /
+            <span th:text="${serviceList.totalPages}"></span>
+        </li>
+        <li class="page-item">
+            <a class="page-link" th:if="${serviceList.hasNext()}"
+               th:href="@{/service/list(page=${serviceList.number + 1})}">Next</a>
+        </li>
+    </ul>
+    <!--    keyword=${keywordVal1}-->
+</nav>
+<div class="container">
+    <table class="table w-75 mx-auto shadow-2-strong">
+        <thead class="table-dark p-3">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Area</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Max People</th>
+            <th scope="col">Rent Type</th>
+            <th scope="col">Facility Type</th>
+            <th scope="col">Description other Convenience</th>
+            <th scope="col">Pool Area</th>
+            <th scope="col">Number Of Floors</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="service,loop : ${serviceList}">
+            <th scope="row" th:text="${loop.count}"></th>
+            <td th:text="${service.serviceName}"></td>
+            <td th:text="${service.serviceArea}"></td>
+            <td th:text="${service.serviceCost}"></td>
+            <td th:text="${service.serviceMaxPeople}"></td>
+            <td th:text="${service.rentType.rentTypeName}"></td>
+            <td th:text="${service.facilityType.facilityTypeName}"></td>
+            <td th:text="${service.descriptionOtherConvenience}"></td>
+            <td th:text="${service.poolArea}"></td>
+            <td th:text="${service.numberOfFloors}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    <footer class="text-center text-white" style="background-color: #21081a;">
 
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-white" href="#">hoang long</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
 <th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
 </body>
 </html>

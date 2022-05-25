@@ -2,17 +2,33 @@ package com.codegym.dto;
 
 import com.codegym.model.CustomerType;
 import lombok.Data;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import javax.validation.constraints.NotEmpty;
 
 
-public class CustomerDto {
+public class CustomerDto implements Validator {
     private Integer customerId;
+    @NotEmpty(message ="Not empty !")
     private String customerName;
+
+    @NotEmpty(message ="Not empty !")
     private String customerDateOfBirth;
+
     private Integer customerGender;
+
+    @NotEmpty(message ="Not empty !")
     private String customerIdCard;
+
+    @NotEmpty(message ="Not empty !")
     private String customerPhone;
+    @NotEmpty(message ="Not empty !")
+
     private String customerEmail;
+    @NotEmpty(message ="Not empty !")
     private String customerAddress;
+
     private CustomerType customerType;
 
     public CustomerDto() {
@@ -88,5 +104,15 @@ public class CustomerDto {
 
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

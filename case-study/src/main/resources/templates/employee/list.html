@@ -10,7 +10,7 @@
 <h1 class="text-center text-light mx-auto">FURAMA RESORT MANAGEMENT</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand">Employee</a>
+        <a class="navbar-brand">EMPLOYEE</a>
         <button
                 class="navbar-toggler"
                 type="button"
@@ -33,53 +33,65 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/employee/list}">Employee</a>
                 </li>
-                <!-- Navbar dropdown -->
-                <li class="nav-item dropdown">
-                    <a
-                            class="nav-link dropdown-toggle"
-                            id="navbarDropdown"
-                            role="button"
-                            data-mdb-toggle="dropdown"
-                            aria-expanded="false"
-                    >
-                        Service
-                    </a>
-                    <!-- Dropdown menu -->
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" th:href="@{/service/list}">List</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" th:href="@{/service/create}">Create</a>
-                        </li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/service/list}">Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contract/list}">Contract</a>
                 </li>
             </ul>
         </div>
     </div>
     <i class="fas fa-plus"><a th:href="@{/employee/create}"> New Employee</a></i>
-    <form class="d-flex input-group w-auto">
-        <input
-                type="search"
-                class="form-control"
-                placeholder="Type query"
-                aria-label="Search"
-        />
-        <button
-                class="btn btn-outline-primary"
-                type="button"
-                data-mdb-ripple-color="dark"
-        >
-            Search
-        </button>
-    </form>
 </nav>
+<form method="get">
+    <div class="row container justify-content-center">
+        <div class="form-outline my-2 col-2 mx-2">
+            <input type="text" id="searchName" class="form-control" name="nameQuery"/>
+            <label class="form-label" for="searchName">Search By Name</label>
+        </div>
+        <div class="form-outline my-2 col-2 me-2">
+            <input type="text" id="searchAddress" class="form-control" name="addressQuery"/>
+            <label class="form-label" for="searchAddress">Search By Address</label>
+        </div>
+        <div class="form-outline my-2 col-2 me-2">
+            <select id="searchPosition" class="form-select" name="positionQuery">
+                <option value="">--Position--</option>
+                <option th:each="position : ${positionList}"
+                        th:value="${position.positionId}"
+                        th:text="${position.positionName}">
+                </option>
+            </select>
+        </div>
+        <div class="form-outline my-2 col-2 me-2">
+            <select id="searchEducationDegree" class="form-select" name="educationDegreeQuery">
+                <option value="">--Education degree--</option>
+                <option th:each="educationDegree : ${educationDegreeList}"
+                        th:value="${educationDegree.educationDegreeId}"
+                        th:text="${educationDegree.educationDegreeName}">
+                </option>
+            </select>
+        </div>
+        <div class="form-outline my-2 col-2 me-2">
+            <select id="searchDivision" class="form-select" name="divisionQuery">
+                <option value="">--Division--</option>
+                <option th:each="division : ${divisionList}"
+                        th:value="${division.divisionId}"
+                        th:text="${division.divisionName}">
+                </option>
+            </select>
+        </div>
+        <div class="col-1 my-2">
+            <input type="submit" id="searchSubmit" value="Search" class="btn btn-dark">
+        </div>
+    </div>
+</form>
 <h2 class="text-center text-dark mx-auto">EMPLOYEE LIST</h2>
 <nav aria-label="Page navigation example">
     <ul class="pagination mx-auto justify-content-center text-center">
         <li class="page-item">
             <a class="page-link" th:if="${employeeList.hasPrevious()}"
-               th:href="@{/employee/list(page=${employeeList.number - 1})}">Previous</a>
+               th:href="@{/employee/list(page=${employeeList.number - 1},nameQuery=${keywordVal1},addressQuery=${keywordVal2},positionQuery=${keywordVal3},educationDegreeQuery=${keywordVal4},divisionQuery=${keywordVal5})}">Previous</a>
         </li>
         <li class="page-link">
             <span th:text="${employeeList.number + 1}"></span>
@@ -88,7 +100,7 @@
         </li>
         <li class="page-item">
             <a class="page-link" th:if="${employeeList.hasNext()}"
-               th:href="@{/employee/list(page=${employeeList.number + 1})}">Next</a>
+               th:href="@{/employee/list(page=${employeeList.number + 1},nameQuery=${keywordVal1},addressQuery=${keywordVal2},positionQuery=${keywordVal3},educationDegreeQuery=${keywordVal4},divisionQuery=${keywordVal5})}">Next</a>
         </li>
     </ul>
     <!--    keyword=${keywordVal1}-->

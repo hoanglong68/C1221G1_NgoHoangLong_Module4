@@ -5,11 +5,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IEmployeeService {
-    Page<Employee> findAll(Pageable pageable);
 
     void save(Employee employee);
 
     Employee findById(String id);
 
     void delete(Employee employee);
+
+    Page<Employee> findAllByProperties(String keyword1, String keyword2, String keyword3, String keyword4, String keyword5, Pageable pageable);
+
 }

@@ -10,7 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/customer")
@@ -21,8 +25,20 @@ public class CustomerController {
     private ICustomerTypeService iCustomerTypeService;
 
     @GetMapping(value = "list")
-    public String goListCustomer(Model model, @PageableDefault(value = 4) Pageable pageable) {
-        model.addAttribute("customerList", iCustomerService.findAll(pageable));
+    public String goListCustomer(Model model,
+                                 @PageableDefault(value = 4) Pageable pageable,
+                                 @RequestParam Optional<String> nameQuery,
+                                 @RequestParam Optional<String> addressQuery,
+                                 @RequestParam Optional<String> customerTypeQuery
+    ) {
+        String keyword1 = nameQuery.orElse("");
+        String keyword2 = addressQuery.orElse("");
+        String keyword3 = customerTypeQuery.orElse("");
+        model.addAttribute("keywordVal1", keyword1);
+        model.addAttribute("keywordVal2", keyword2);
+        model.addAttribute("keywordVal3", keyword3);
+        model.addAttribute("customerTypeList", this.iCustomerTypeService.findAll());
+        model.addAttribute("customerList", iCustomerService.findAllByProperties(keyword1, keyword2, keyword3, pageable));
         return "/customer/list";
     }
 
@@ -34,7 +50,12 @@ public class CustomerController {
     }
 
     @PostMapping(value = "create")
-    public String doCreateCustomer(CustomerDto customerDto) {
+    public String doCreateCustomer(@Validated CustomerDto customerDto,
+                                   BindingResult bindingResult) {
+        new CustomerDto().validate(customerDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            return "/customer/create";
+        }
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
         this.iCustomerService.save(customer);
