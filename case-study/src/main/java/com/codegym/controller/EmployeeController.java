@@ -1,7 +1,7 @@
 package com.codegym.controller;
 
 import com.codegym.dto.EmployeeDto;
-import com.codegym.model.Employee;
+import com.codegym.model.*;
 import com.codegym.service.IDivisionService;
 import com.codegym.service.IEducationDegreeService;
 import com.codegym.service.IEmployeeService;
@@ -12,11 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -33,6 +31,21 @@ public class EmployeeController {
 
     @Autowired
     private IEducationDegreeService iEducationDegreeService;
+
+    @ModelAttribute("positionList")
+    public List<Position> getPositionList() {
+        return this.iPositionService.findAll();
+    }
+
+    @ModelAttribute("educationDegreeList")
+    public List<EducationDegree> getEducationDegreeList() {
+        return this.iEducationDegreeService.findAll();
+    }
+
+    @ModelAttribute("divisionList")
+    public List<Division> getDivisionList() {
+        return this.iDivisionService.findAll();
+    }
 
     @GetMapping(value = "/list")
     public String goListEmployee(Model model,
@@ -52,21 +65,15 @@ public class EmployeeController {
         model.addAttribute("keywordVal3", keyword3);
         model.addAttribute("keywordVal4", keyword4);
         model.addAttribute("keywordVal5", keyword5);
-        model.addAttribute("positionList", this.iPositionService.findAll());
-        model.addAttribute("divisionList", this.iDivisionService.findAll());
-        model.addAttribute("educationDegreeList", this.iEducationDegreeService.findAll());
         model.addAttribute("employeeList",
                 this.iEmployeeService.findAllByProperties
-                        (keyword1,keyword2,keyword3,keyword4,keyword5,pageable));
+                        (keyword1, keyword2, keyword3, keyword4, keyword5, pageable));
         return "/employee/list";
     }
 
     @GetMapping(value = "/create")
     public String goCreateForm(Model model) {
         model.addAttribute("employeeDto", new EmployeeDto());
-        model.addAttribute("positionList", this.iPositionService.findAll());
-        model.addAttribute("divisionList", this.iDivisionService.findAll());
-        model.addAttribute("educationDegreeList", this.iEducationDegreeService.findAll());
         return "/employee/create";
     }
 
@@ -88,9 +95,6 @@ public class EmployeeController {
         EmployeeDto employeeDto = new EmployeeDto();
         BeanUtils.copyProperties(employee, employeeDto);
         model.addAttribute("employeeDto", employeeDto);
-        model.addAttribute("positionList", this.iPositionService.findAll());
-        model.addAttribute("divisionList", this.iDivisionService.findAll());
-        model.addAttribute("educationDegreeList", this.iEducationDegreeService.findAll());
         return "employee/edit";
     }
 

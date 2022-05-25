@@ -3,18 +3,47 @@ package com.codegym.dto;
 import com.codegym.model.Division;
 import com.codegym.model.EducationDegree;
 import com.codegym.model.Position;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-public class EmployeeDto {
+import javax.validation.constraints.*;
+import java.time.LocalDate;
+
+public class EmployeeDto implements Validator {
     private Integer employeeId;
+
+    @NotEmpty(message = "Not empty !")
     private String employeeName;
+
+    @NotEmpty(message = "Not empty !")
     private String employeeDateOfBirth;
+
+    @NotEmpty(message = "Not empty !")
+    @Pattern(regexp = "^\\d{9}|\\d{12}$", message = "9 or 12 number")
     private String employeeIdCard;
+
+    @NotEmpty(message = "Not empty !")
+    @Positive(message = "must be positive number !")
+
     private Double employeeSalary;
+
+    @NotEmpty(message = "Not empty !")
+    @Pattern(regexp = "((\\(84\\)\\+(90))|(\\(84\\)\\+(91))|(090)|(091))\\d{7}",
+            message = "090xxxxxxx,091xxxxxxx ,(84)+90xxxxxxx,(84)+91xxxxxxx")
     private String employeePhone;
+
+    @NotEmpty(message = "Not empty !")
+    @Email(message = "base on ...@dot...")
     private String employeeEmail;
+
+    @NotEmpty(message = "Not empty !")
     private String employeeAddress;
+
+    @NotNull(message = "pls confirm your position !")
     private Position position;
+    @NotNull(message = "pls confirm your division !")
     private Division division;
+    @NotNull(message = "pls confirm your degree !")
     private EducationDegree educationDegree;
 
     public EmployeeDto() {
@@ -106,5 +135,18 @@ public class EmployeeDto {
 
     public void setEducationDegree(EducationDegree educationDegree) {
         this.educationDegree = educationDegree;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        EmployeeDto employeeDto = (EmployeeDto) target;
+        if (!LocalDate.parse(employeeDto.employeeDateOfBirth).isBefore(LocalDate.now())) {
+            errors.rejectValue("employeeDateOfBirth", "dob.checkDate", "giảng làm !");
+        }
     }
 }

@@ -91,6 +91,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scope="col">Code</th>
             <th scope="col">Date of birth</th>
             <th scope="col">Gender</th>
             <th scope="col">Id Card</th>
@@ -105,6 +106,7 @@
         <tr th:each="customer,loop : ${customerList}">
             <th scope="row" th:text="${loop.count}"></th>
             <td th:text="${customer.customerName}"></td>
+            <td th:text="${customer.customerCode}"></td>
             <td th:text="${customer.customerDateOfBirth}"></td>
             <th:block th:if="${customer.customerGender == 1}">
                 <th>Male</th>

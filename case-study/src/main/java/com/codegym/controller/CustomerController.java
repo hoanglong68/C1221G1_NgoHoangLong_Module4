@@ -2,6 +2,7 @@ package com.codegym.controller;
 
 import com.codegym.dto.CustomerDto;
 import com.codegym.model.Customer;
+import com.codegym.model.CustomerType;
 import com.codegym.service.ICustomerService;
 import com.codegym.service.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,6 +25,11 @@ public class CustomerController {
     private ICustomerService iCustomerService;
     @Autowired
     private ICustomerTypeService iCustomerTypeService;
+
+    @ModelAttribute("customerTypeList")
+    public List<CustomerType> customerTypeList() {
+        return this.iCustomerTypeService.findAll();
+    }
 
     @GetMapping(value = "list")
     public String goListCustomer(Model model,
@@ -37,7 +44,6 @@ public class CustomerController {
         model.addAttribute("keywordVal1", keyword1);
         model.addAttribute("keywordVal2", keyword2);
         model.addAttribute("keywordVal3", keyword3);
-        model.addAttribute("customerTypeList", this.iCustomerTypeService.findAll());
         model.addAttribute("customerList", iCustomerService.findAllByProperties(keyword1, keyword2, keyword3, pageable));
         return "/customer/list";
     }
@@ -45,7 +51,6 @@ public class CustomerController {
     @GetMapping(value = "create")
     public String goCreateForm(Model model) {
         model.addAttribute("customerDto", new CustomerDto());
-        model.addAttribute("customerTypeList", this.iCustomerTypeService.findAll());
         return "/customer/create";
     }
 
@@ -54,7 +59,7 @@ public class CustomerController {
                                    BindingResult bindingResult) {
         new CustomerDto().validate(customerDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
-            return "/customer/create";
+            return "customer/create";
         }
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
@@ -72,7 +77,6 @@ public class CustomerController {
         CustomerDto customerDto = new CustomerDto();
         BeanUtils.copyProperties(customer, customerDto);
         model.addAttribute("customerDto", customerDto);
-        model.addAttribute("customerTypeList", this.iCustomerTypeService.findAll());
         return "customer/edit";
     }
 
@@ -90,7 +94,7 @@ public class CustomerController {
         if (customer == null) {
             return "error";
         }
-        this.iCustomerService.delete(customer);
+        this.iCustomerService.delete(customer.getCustomerId());
         return "redirect:/customer/list";
     }
 }

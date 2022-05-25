@@ -66,47 +66,62 @@
     <fieldset class="w-75 mx-auto">
         <legend class="text-center my-4"><span class="text-secondary">Create New Customer</span></legend>
         <div class="form-outline w-25 mx-auto my-4">
-            <input class="form-control is-invalid" id="name" type="text" th:field="*{customerName}"/>
+            <input class="form-control" id="code" type="text" th:field="*{customerCode}"/>
+            <label class="form-label" for="code">Code KH-XXXX (x is 0-9)</label>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('customerCode')}" th:errors="*{customerCode}" style="color: red"></p>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="name" type="text" th:field="*{customerName}"/>
             <label class="form-label" for="name">Name</label>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('customerName')}">
-                <p th:errors="*{customerName}"></p>
-            </div>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" style="color: red"></p>
         </div>
         <div class="form-outline w-25 mx-auto my-4">
-            <input class="form-control is-invalid" id="dob" type="date" th:field="*{customerDateOfBirth}"/>
+            <input class="form-control" id="dob" type="date" th:field="*{customerDateOfBirth}"/>
             <label class="form-label" for="dob">Date Of Birth</label>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('customerDateOfBirth')}">
-                <p th:errors="*{customerDateOfBirth}"></p>
-            </div>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('customerDateOfBirth')}" th:errors="*{customerDateOfBirth}"
+               style="color: red"></p>
+        </div>
+
         <div class="form-outline w-25 mx-auto my-4">
-            <input class="form-control is-invalid" id="id-card" type="text" th:field="*{customerIdCard}"/>
+            <input class="form-control" id="id-card" type="text" th:field="*{customerIdCard}"/>
             <label class="form-label" for="id-card">Id Card</label>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('customerIdCard')}">
-                <p th:errors="*{customerIdCard}"></p>
-            </div>
         </div>
-        <div class="form-outline w-25 mx-auto my-4">
-            <input class="form-control is-invalid" id="phone" type="text" th:field="*{customerPhone}"/>
-            <label class="form-label" for="phone">Phone</label>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('customerPhone')}">
-                <p th:errors="*{customerPhone}"></p>
-            </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('customerIdCard')}" th:errors="*{customerIdCard}" style="color: red"></p>
         </div>
+
         <div class="form-outline w-25 mx-auto my-4">
-            <input class="form-control is-invalid" id="email" type="text" th:field="*{customerEmail}"/>
+            <input class="form-control" id="phone" type="text" th:field="*{customerPhone}"/>
+            <label class="form-label" for="phone">Phone(7x)090x,091x; 84+90x,91x</label>
+        </div>
+        <div class="w-25 mx-auto my-4">
+
+            <p th:if="${#fields.hasErrors('customerPhone')}" th:errors="*{customerPhone}" style="color: red"></p>
+        </div>
+
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="email" type="text" th:field="*{customerEmail}"/>
             <label class="form-label" for="email">Email</label>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('customerEmail')}">
-                <p th:errors="*{customerEmail}"></p>
-            </div>
         </div>
+        <div class="w-25 mx-auto my-4">
+
+            <p th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}" style="color: red"></p>
+        </div>
+
         <div class="form-outline w-25 mx-auto my-4">
-            <input class="form-control is-invalid" id="address" type="text" th:field="*{customerAddress}"/>
+            <input class="form-control" id="address" type="text" th:field="*{customerAddress}"/>
             <label class="form-label" for="address">Address</label>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('customerAddress')}">
-                <p th:errors="*{customerAddress}"></p>
-            </div>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}" style="color: red"></p>
+        </div>
+
         <div class="form-outline w-25 mx-auto my-4">
             <select th:field="*{customerGender}" class="form-select" aria-label="Disabled select example">
                 <option value="" th:text="--Gender--"></option>
@@ -114,13 +129,19 @@
                 <option th:value="0" th:text="Female"></option>
             </select>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('customerGender')}" th:errors="*{customerGender}" style="color: red"></p>
+        </div>
         <div class="form-outline w-25 mx-auto my-4">
             <select th:field="*{customerType}" class="form-select" aria-label="Disabled select example">
-                <option value="0" th:text="--Type--"></option>
+                <option value="" th:text="--type--"></option>
                 <option th:each="customerType: ${customerTypeList}"
                         th:value="${customerType.customerTypeId}"
                         th:text="${customerType.customerTypeName}"></option>
             </select>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('customerType')}" th:errors="*{customerType}" style="color: red"></p>
         </div>
     </fieldset>
     <div class="text-center">

@@ -8,6 +8,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
+    private String customerCode;
     private String customerName;
     private String customerDateOfBirth;
     private Integer customerGender;
@@ -15,12 +16,28 @@ public class Customer {
     private String customerPhone;
     private String customerEmail;
     private String customerAddress;
-
+    private boolean customerStatus;
     @ManyToOne
     @JoinColumn(name = "customer_type_id", referencedColumnName = "customerTypeId")
     private CustomerType customerType;
 
     public Customer() {
+    }
+
+    public boolean isCustomerStatus() {
+        return customerStatus;
+    }
+
+    public void setCustomerStatus(boolean customerStatus) {
+        this.customerStatus = customerStatus;
+    }
+
+    public String getCustomerCode() {
+        return customerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
     }
 
     public Integer getCustomerId() {

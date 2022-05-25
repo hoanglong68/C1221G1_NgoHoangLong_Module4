@@ -10,7 +10,7 @@ public interface ICustomerService {
 
     Customer findById(String id);
 
-    void delete(Customer customer);
+    void delete(Integer customerId);
 
     Page<Customer> findAllByProperties(String keyword1, String keyword2, String keyword3, Pageable pageable);
 }
