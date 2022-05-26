@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -78,7 +80,12 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/create")
-    public String doCreateEmployee(EmployeeDto employeeDto) {
+    public String doCreateEmployee(@Validated EmployeeDto employeeDto,
+                                   BindingResult bindingResult) {
+        new EmployeeDto().validate(employeeDto,bindingResult);
+        if (bindingResult.hasFieldErrors()){
+            return "employee/create";
+        }
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDto, employee);
         this.iEmployeeService.save(employee);

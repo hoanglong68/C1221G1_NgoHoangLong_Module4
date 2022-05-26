@@ -94,7 +94,7 @@ public class CustomerController {
         if (customer == null) {
             return "error";
         }
-        this.iCustomerService.delete(customer.getCustomerId());
+        this.iCustomerService.delete(customer);
         return "redirect:/customer/list";
     }
 }

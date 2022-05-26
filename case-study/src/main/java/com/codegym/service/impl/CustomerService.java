@@ -24,12 +24,18 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public void delete(Integer customerId) {
-        iCustomerRepository.updateStatusCustomer(customerId);
+    public void delete(Customer customer) {
+//        iCustomerRepository.updateStatusCustomer(customerId);
+        Integer id = customer.getCustomerId();
+        Customer existCustomer = iCustomerRepository.findById(id).orElse(null);
+        assert existCustomer != null;
+        existCustomer.setCustomerStatus(false);
+        iCustomerRepository.save(existCustomer);
     }
 
     @Override
     public Page<Customer> findAllByProperties(String keyword1, String keyword2, String keyword3, Pageable pageable) {
+        System.out.println("1:" + keyword3);
         if ("".equals(keyword3)) {
             return iCustomerRepository
                     .findAllByCustomerNameContainingAndCustomerAddressContainingAndCustomerStatus
@@ -39,4 +45,6 @@ public class CustomerService implements ICustomerService {
                 .findAllByCustomerNameContainingAndCustomerAddressContainingAndCustomerType_CustomerTypeIdAndCustomerStatus
                         (keyword1, keyword2, Integer.parseInt(keyword3), true, pageable);
     }
+//        return this.iCustomerRepository.findAllByProperties("%"+keyword1+"%", "%"+keyword2+"%", keyword3, pageable);
+//    }
 }

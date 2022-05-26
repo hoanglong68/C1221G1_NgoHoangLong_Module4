@@ -14,6 +14,7 @@ public class Employee {
     private String employeePhone;
     private String employeeEmail;
     private String employeeAddress;
+    private boolean employeeStatus;
 
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "positionId")
@@ -26,6 +27,14 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "education_degree_id", referencedColumnName = "educationDegreeId")
     private EducationDegree educationDegree;
+
+    public boolean isEmployeeStatus() {
+        return employeeStatus;
+    }
+
+    public void setEmployeeStatus(boolean employeeStatus) {
+        this.employeeStatus = employeeStatus;
+    }
 
     public Division getDivision() {
         return division;

@@ -1,14 +1,10 @@
 package com.codegym.dto;
 
-import com.codegym.model.Customer;
 import com.codegym.model.CustomerType;
-import lombok.Data;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
 import javax.validation.constraints.*;
 import java.time.LocalDate;
-
 
 public class CustomerDto implements Validator {
     private Integer customerId;
@@ -19,7 +15,6 @@ public class CustomerDto implements Validator {
     @NotEmpty(message = "Not empty !")
     private String customerName;
 
-    @NotEmpty(message = "Not empty !")
     private String customerDateOfBirth;
 
     @NotNull(message = "pls confirm your gender !")
@@ -45,6 +40,7 @@ public class CustomerDto implements Validator {
     private CustomerType customerType;
 
     private boolean customerStatus = true;
+
 
     public boolean isCustomerStatus() {
         return customerStatus;
@@ -145,8 +141,10 @@ public class CustomerDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         CustomerDto customerDto = (CustomerDto) target;
-        if (!LocalDate.parse(customerDto.customerDateOfBirth).isBefore(LocalDate.now())){
-                errors.rejectValue("customerDateOfBirth","dob.checkDate","giảng làm !");
+        if ("".equals(customerDto.customerDateOfBirth)) {
+            errors.rejectValue("customerDateOfBirth", "dob.checkEmpty", "giảng làm !");
+        } else if (!LocalDate.parse(customerDto.customerDateOfBirth).isBefore(LocalDate.now())) {
+            errors.rejectValue("customerDateOfBirth", "dob.checkDate", "giảng làm !");
         }
     }
 }

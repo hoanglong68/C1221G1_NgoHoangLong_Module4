@@ -15,6 +15,10 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
             nativeQuery = true)
     void updateStatusCustomer(Integer customerId);
 
+    @Query(value = "select * from customer where customer_name like :customerName and customer_address like :customerAddress " +
+            "and customer_type_id like :customerTypeId and customer_status = true", nativeQuery = true)
+    Page<Customer> findAllByProperties(String customerName, String customerAddress, String customerTypeId,Pageable pageable);
+
     Page<Customer>
     findAllByCustomerNameContainingAndCustomerAddressContainingAndCustomerType_CustomerTypeIdAndCustomerStatus
             (String name, String address, Integer type, Boolean status, Pageable pageable);

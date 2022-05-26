@@ -44,24 +44,7 @@
             </ul>
         </div>
     </div>
-    <i class="fas fa-plus"><a th:href="@{/employee/create}"> New Employee</a></i>
-    <form class="d-flex input-group w-auto">
-        <input
-                type="search"
-                class="form-control"
-                placeholder="Type query"
-                aria-label="Search"
-        />
-        <button
-                class="btn btn-outline-primary"
-                type="button"
-                data-mdb-ripple-color="dark"
-        >
-            Search
-        </button>
-    </form>
 </nav>
-
 <form th:object="${employeeDto}" method="post" th:action="@{/employee/create}">
     <fieldset class="w-75 mx-auto">
         <legend class="text-center my-4"><span class="text-secondary">Create New Employee</span></legend>
@@ -69,56 +52,86 @@
             <input class="form-control" id="name" type="text" th:field="*{employeeName}"/>
             <label class="form-label" for="name">Name</label>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}" style="color: red"></p>
+        </div>
         <div class="form-outline w-25 mx-auto my-4">
             <input class="form-control" id="dob" type="date" th:field="*{employeeDateOfBirth}"/>
             <label class="form-label" for="dob">Date Of Birth</label>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('employeeDateOfBirth')}" th:errors="*{employeeDateOfBirth}" style="color: red"></p>
         </div>
         <div class="form-outline w-25 mx-auto my-4">
             <input class="form-control" id="id-card" type="text" th:field="*{employeeIdCard}"/>
             <label class="form-label" for="id-card">Id Card</label>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('employeeIdCard')}" th:errors="*{employeeIdCard}" style="color: red"></p>
+        </div>
         <div class="form-outline w-25 mx-auto my-4">
             <input class="form-control" id="salary" type="text" th:field="*{employeeSalary}"/>
             <label class="form-label" for="salary">Salary</label>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('employeeSalary')}" th:errors="*{employeeSalary}" style="color: red"></p>
+        </div>
         <div class="form-outline w-25 mx-auto my-4">
             <input class="form-control" id="phone" type="text" th:field="*{employeePhone}"/>
-            <label class="form-label" for="phone">Phone</label>
+            <label class="form-label" for="phone">Phone(7x)090x,091x; 84+90x,91x</label>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('employeePhone')}" th:errors="*{employeePhone}" style="color: red"></p>
         </div>
         <div class="form-outline w-25 mx-auto my-4">
             <input class="form-control" id="email" type="text" th:field="*{employeeEmail}"/>
             <label class="form-label" for="email">Email</label>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('employeeEmail')}" th:errors="*{employeeEmail}" style="color: red"></p>
+        </div>
         <div class="form-outline w-25 mx-auto my-4">
             <input class="form-control" id="address" type="text" th:field="*{employeeAddress}"/>
             <label class="form-label" for="address">Address</label>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('employeeAddress')}" th:errors="*{employeeAddress}" style="color: red"></p>
+        </div>
         <div class="form-outline w-25 mx-auto my-4">
             <select th:field="*{position}" class="form-select" aria-label="Disabled select example">
-                <option value="" th:text="--select--"></option>
+                <option value="" th:text="--Position--"></option>
                 <option th:each="position: ${positionList}"
                         th:value="${position.positionId}"
                         th:text="${position.positionName}">
                 </option>
             </select>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('position')}" th:errors="*{position}" style="color: red"></p>
+        </div>
         <div class="form-outline w-25 mx-auto my-4">
             <select th:field="*{division}" class="form-select" aria-label="Disabled select example">
-                <option value="0" th:text="--select--"></option>
+                <option value="" th:text="--Division--"></option>
                 <option th:each="division: ${divisionList}"
                         th:value="${division.divisionId}"
                         th:text="${division.divisionName}">
                 </option>
             </select>
         </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('division')}" th:errors="*{division}" style="color: red"></p>
+        </div>
         <div class="form-outline w-25 mx-auto my-4">
             <select th:field="*{educationDegree}" class="form-select" aria-label="Disabled select example">
-                <option value="0" th:text="--select--"></option>
+                <option value="" th:text="--Degree--"></option>
                 <option th:each="educationDegree: ${educationDegreeList}"
                         th:value="${educationDegree.educationDegreeId}"
                         th:text="${educationDegree.educationDegreeName}">
                 </option>
             </select>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('educationDegree')}" th:errors="*{educationDegree}" style="color: red"></p>
         </div>
     </fieldset>
     <div class="text-center">

@@ -15,16 +15,13 @@ public class EmployeeDto implements Validator {
     @NotEmpty(message = "Not empty !")
     private String employeeName;
 
-    @NotEmpty(message = "Not empty !")
     private String employeeDateOfBirth;
 
     @NotEmpty(message = "Not empty !")
     @Pattern(regexp = "^\\d{9}|\\d{12}$", message = "9 or 12 number")
     private String employeeIdCard;
 
-    @NotEmpty(message = "Not empty !")
     @Positive(message = "must be positive number !")
-
     private Double employeeSalary;
 
     @NotEmpty(message = "Not empty !")
@@ -41,10 +38,22 @@ public class EmployeeDto implements Validator {
 
     @NotNull(message = "pls confirm your position !")
     private Position position;
+
     @NotNull(message = "pls confirm your division !")
     private Division division;
+
     @NotNull(message = "pls confirm your degree !")
     private EducationDegree educationDegree;
+
+    private boolean employeeStatus = true;
+
+    public boolean isEmployeeStatus() {
+        return employeeStatus;
+    }
+
+    public void setEmployeeStatus(boolean employeeStatus) {
+        this.employeeStatus = employeeStatus;
+    }
 
     public EmployeeDto() {
     }
@@ -145,7 +154,9 @@ public class EmployeeDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         EmployeeDto employeeDto = (EmployeeDto) target;
-        if (!LocalDate.parse(employeeDto.employeeDateOfBirth).isBefore(LocalDate.now())) {
+        if ("".equals(employeeDto.employeeDateOfBirth)) {
+            errors.rejectValue("employeeDateOfBirth", "dob.checkEmpty", "giảng làm !");
+        } else if (!LocalDate.parse(employeeDto.employeeDateOfBirth).isBefore(LocalDate.now())) {
             errors.rejectValue("employeeDateOfBirth", "dob.checkDate", "giảng làm !");
         }
     }

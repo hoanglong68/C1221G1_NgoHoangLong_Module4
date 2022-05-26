@@ -44,24 +44,7 @@
             </ul>
         </div>
     </div>
-    <i class="fas fa-plus"><a th:href="@{/customer/create}"> New Customer</a></i>
-    <form class="d-flex input-group w-auto">
-        <input
-                type="search"
-                class="form-control"
-                placeholder="Type query"
-                aria-label="Search"
-        />
-        <button
-                class="btn btn-outline-primary"
-                type="button"
-                data-mdb-ripple-color="dark"
-        >
-            Search
-        </button>
-    </form>
 </nav>
-
 <form th:object="${customerDto}" method="post" th:action="@{/customer/create}">
     <fieldset class="w-75 mx-auto">
         <legend class="text-center my-4"><span class="text-secondary">Create New Customer</span></legend>
