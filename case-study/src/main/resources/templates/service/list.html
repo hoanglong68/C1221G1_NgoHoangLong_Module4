@@ -68,6 +68,7 @@
         <thead class="table-dark p-3">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Code</th>
             <th scope="col">Name</th>
             <th scope="col">Area</th>
             <th scope="col">Cost</th>
@@ -82,6 +83,7 @@
         <tbody>
         <tr th:each="service,loop : ${serviceList}">
             <th scope="row" th:text="${loop.count}"></th>
+            <td th:text="${service.serviceCode}"></td>
             <td th:text="${service.serviceName}"></td>
             <td th:text="${service.serviceArea}"></td>
             <td th:text="${service.serviceCost}"></td>

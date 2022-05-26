@@ -27,7 +27,7 @@ public class ServiceController {
 
     @GetMapping(value = "/list")
     public String goListService(Model model,@PageableDefault(value = 3) Pageable pageable) {
-        model.addAttribute("serviceList", this.iServiceService.findAll(pageable));
+        model.addAttribute("serviceList", this.iServiceService.findAllByPage(pageable));
         return "/service/list";
     }
 

@@ -42,22 +42,8 @@
             </ul>
         </div>
     </div>
-    <i class="fas fa-plus"><a th:href="@{/customer/create}"> New Customer</a></i>
-    <form class="d-flex input-group w-auto">
-        <input
-                type="search"
-                class="form-control"
-                placeholder="Type query"
-                aria-label="Search"
-        />
-        <button
-                class="btn btn-outline-primary"
-                type="button"
-                data-mdb-ripple-color="dark"
-        >
-            Search
-        </button>
-    </form>
+    <i class="fas fa-plus"><a th:href="@{/contract/create}"> New Contract</a></i>
+    <i class="fas fa-plus"><a th:href="@{/contract-detail/create-detail}">Contract Detail</a></i>
 </nav>
 <h2 class="text-center text-dark mx-auto">CONTRACT LIST</h2>
 <nav aria-label="Page navigation example">
@@ -95,19 +81,13 @@
         <tbody>
         <tr th:each="contract,loop : ${contractList}">
             <th scope="row" th:text="${loop.count}"></th>
-            <td th:text="${contract.customerName}"></td>
-            <td th:text="${contract.customerDateOfBirth}"></td>
-            <th:block th:if="${contract.customerGender == 1}">
-                <th>Male</th>
-            </th:block>
-            <th:block th:if="${contract.customerGender == 0}">
-                <th>Female</th>
-            </th:block>
-            <td th:text="${contract.customerIdCard}"></td>
-            <td th:text="${contract.customerPhone}"></td>
-            <td th:text="${contract.customerEmail}"></td>
-            <td th:text="${contract.customerAddress}"></td>
-            <td th:text="${contract.customerType.customerTypeName}"></td>
+            <td th:text="${contract.contractStartDate}"></td>
+            <td th:text="${contract.contractEndDate}"></td>
+            <td th:text="${contract.contractDeposit}"></td>
+            <td th:text="${contract.contractTotalMoney}"></td>
+            <td th:text="${contract.employee.employeeName}"></td>
+            <td th:text="${contract.customer.customerName}"></td>
+            <td th:text="${contract.service.serviceName}"></td>
         </tr>
         </tbody>
     </table>

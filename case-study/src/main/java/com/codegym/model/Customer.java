@@ -2,6 +2,7 @@ package com.codegym.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -20,8 +21,17 @@ public class Customer {
     @ManyToOne
     @JoinColumn(name = "customer_type_id", referencedColumnName = "customerTypeId")
     private CustomerType customerType;
-
+    @OneToMany(mappedBy = "customer")
+    List<Contract> contractList;
     public Customer() {
+    }
+
+    public List<Contract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
     }
 
     public boolean isCustomerStatus() {

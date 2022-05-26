@@ -10,7 +10,7 @@
 <h1 class="text-center text-light mx-auto">FURAMA RESORT MANAGEMENT</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand">CUSTOMER</a>
+        <a class="navbar-brand">OCCUPIED LIST</a>
         <button
                 class="navbar-toggler"
                 type="button"
@@ -42,92 +42,54 @@
             </ul>
         </div>
     </div>
-    <i class="fas fa-plus"><a th:href="@{/customer/create}"> New Customer</a></i>
 </nav>
-<form method="get">
-    <div class="row">
-        <div class="form-outline my-2 col-3 mx-3">
-            <input type="text" id="searchName" class="form-control" name="nameQuery"/>
-            <label class="form-label" for="searchName">Search By Name</label>
-        </div>
-        <div class="form-outline my-2 col-3 me-2">
-            <input type="text" id="searchAddress" class="form-control" name="addressQuery"/>
-            <label class="form-label" for="searchAddress">Search By Address</label>
-        </div>
-        <div class="form-outline my-2 col-3 mx-2">
-            <select id="searchType" class="form-select" name="customerTypeQuery">
-                <option value="">--Customer type--</option>
-                <option th:each="customerType : ${customerTypeList}"
-                        th:value="${customerType.customerTypeId}"
-                        th:text="${customerType.customerTypeName}">
-                </option>
-            </select>
-        </div>
-        <input type="submit" id="searchSubmit" value="Search" class="btn btn-dark col-2 my-2">
-    </div>
-</form>
 <h2 class="text-center text-dark mx-auto">CUSTOMER LIST</h2>
-<nav aria-label="Page navigation example">
-    <ul class="pagination mx-auto justify-content-center text-center">
-        <li class="page-item">
-            <a class="page-link" th:if="${customerList.hasPrevious()}"
-               th:href="@{/customer/list(page=${customerList.number - 1},nameQuery=${keywordVal1},addressQuery=${keywordVal2},customerTypeQuery=${keywordVal3})}">Previous</a>
-        </li>
-        <li class="page-link">
-            <span th:text="${customerList.number + 1}"></span>
-            /
-            <span th:text="${customerList.totalPages}"></span>
-        </li>
-        <li class="page-item">
-            <a class="page-link" th:if="${customerList.hasNext()}"
-               th:href="@{/customer/list(page=${customerList.number + 1},nameQuery=${keywordVal1},addressQuery=${keywordVal2},customerTypeQuery=${keywordVal3})}">Next</a>
-        </li>
-    </ul>
-    <!--    keyword=${keywordVal1}-->
-</nav>
+<!--<nav aria-label="Page navigation example">-->
+<!--    <ul class="pagination mx-auto justify-content-center text-center">-->
+<!--        <li class="page-item">-->
+<!--            <a class="page-link" th:if="${occupiedList.hasPrevious()}"-->
+<!--               th:href="@{/customer/occ-list(page=${occupiedList.number - 1},nameQuery=${keywordVal1},addressQuery=${keywordVal2},customerTypeQuery=${keywordVal3})}">Previous</a>-->
+<!--        </li>-->
+<!--        <li class="page-link">-->
+<!--            <span th:text="${occupiedList.number + 1}"></span>-->
+<!--            /-->
+<!--            <span th:text="${occupiedList.totalPages}"></span>-->
+<!--        </li>-->
+<!--        <li class="page-item">-->
+<!--            <a class="page-link" th:if="${occupiedList.hasNext()}"-->
+<!--               th:href="@{/customer/occ-list(page=${occupiedList.number + 1},nameQuery=${keywordVal1},addressQuery=${keywordVal2},customerTypeQuery=${keywordVal3})}">Next</a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--    &lt;!&ndash;    keyword=${keywordVal1}&ndash;&gt;-->
+<!--</nav>-->
 <div class="container">
     <table class="table w-75 mx-auto shadow-2-strong">
         <thead class="table-dark p-3">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Code</th>
-            <th scope="col">Date of birth</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Id Card</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Address</th>
+            <th scope="col">Customer Code</th>
+            <th scope="col">Customer Name</th>
             <th scope="col">Customer Type</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Attach Service</th>
+            <th scope="col">Attach Service Status</th>
+            <th scope="col">Quantity</th>
             <th scope="col" colspan="2" class="text-center">Function</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="customer,loop : ${customerList}">
+        <tr th:each="occ,loop : ${occupiedList}">
             <th scope="row" th:text="${loop.count}"></th>
-            <td th:text="${customer.customerName}"></td>
-            <td th:text="${customer.customerCode}"></td>
-            <td th:text="${customer.customerDateOfBirth}"></td>
-            <th:block th:if="${customer.customerGender == 1}">
-                <th>Male</th>
-            </th:block>
-            <th:block th:if="${customer.customerGender == 0}">
-                <th>Female</th>
-            </th:block>
-            <td th:text="${customer.customerIdCard}"></td>
-            <td th:text="${customer.customerPhone}"></td>
-            <td th:text="${customer.customerEmail}"></td>
-            <td th:text="${customer.customerAddress}"></td>
-            <td th:text="${customer.customerType.customerTypeName}"></td>
-            <td>
-                <a class="btn btn-warning" th:href="@{/customer/edit(id=${customer.customerId})}">Edit</a>
-            </td>
-            <td>
-                <a class="btn btn-warning" data-mdb-toggle="modal" data-mdb-target="#exampleModal"
-                   th:attr="onclick=|deleteModal('${customer.customerId}', '${customer.customerName}')|">
-                    Delete
-                </a>
-            </td>
+<!--            <td th:text="${occ.occCustomerId}"></td>-->
+            <td th:text="${occ.occCustomerCode}"></td>
+            <td th:text="${occ.occCustomerName}"></td>
+            <td th:text="${occ.occCustomerTypeName}"></td>
+            <td th:text="${occ.occStartDate}"></td>
+            <td th:text="${occ.occEndDate}"></td>
+            <td th:text="${occ.attachServiceName}"></td>
+            <td th:text="${occ.attachServiceStatus}"></td>
+            <td th:text="${occ.quantity}"></td>
         </tr>
         </tbody>
     </table>
@@ -168,8 +130,6 @@
 </div>
 <script>
     function deleteModal(id, name) {
-        // $("#get-id").value = id;
-        // $("#get-id").innerText = name;
         document.getElementById("get-id").value = id;
         document.getElementById("get-name").innerText = name;
     }

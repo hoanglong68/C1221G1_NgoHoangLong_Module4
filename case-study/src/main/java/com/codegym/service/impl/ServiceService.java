@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ServiceService implements IServiceService {
     @Autowired
@@ -18,7 +20,12 @@ public class ServiceService implements IServiceService {
     }
 
     @Override
-    public Page<com.codegym.model.Service> findAll(Pageable pageable) {
+    public Page<com.codegym.model.Service> findAllByPage(Pageable pageable) {
         return iServiceRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<com.codegym.model.Service> findAll() {
+        return iServiceRepository.findAll();
     }
 }

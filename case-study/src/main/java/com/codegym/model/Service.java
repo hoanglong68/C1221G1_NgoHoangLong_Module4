@@ -1,12 +1,14 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer serviceId;
+    private String serviceCode;
     private String serviceName;
     private Integer serviceArea;
     private Double serviceCost;
@@ -16,14 +18,33 @@ public class Service {
     private Double poolArea;
     private Integer numberOfFloors;
     @ManyToOne
-    @JoinColumn(name = "rent_type_id",referencedColumnName = "rentTypeId")
+    @JoinColumn(name = "rent_type_id", referencedColumnName = "rentTypeId")
     private RentType rentType;
 
     @ManyToOne
-    @JoinColumn(name = "facility_type_id",referencedColumnName = "facilityTypeId")
-    private FacilityType facilityType ;
+    @JoinColumn(name = "facility_type_id", referencedColumnName = "facilityTypeId")
+    private FacilityType facilityType;
+
+    @OneToMany(mappedBy = "service")
+    List<Contract> contractList;
 
     public Service() {
+    }
+
+    public List<Contract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
+    }
+
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
     public Integer getServiceId() {
