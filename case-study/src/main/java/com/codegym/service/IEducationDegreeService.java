@@ -1,6 +1,6 @@
 package com.codegym.service;
 
-import com.codegym.model.EducationDegree;
+import com.codegym.model.employee.EducationDegree;
 
 import java.util.List;
 

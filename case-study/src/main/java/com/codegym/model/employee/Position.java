@@ -1,4 +1,4 @@
-package com.codegym.model;
+package com.codegym.model.employee;
 
 import javax.persistence.*;
 import java.util.List;

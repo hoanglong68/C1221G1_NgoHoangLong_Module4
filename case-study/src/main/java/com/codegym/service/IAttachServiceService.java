@@ -1,6 +1,6 @@
 package com.codegym.service;
 
-import com.codegym.model.AttachService;
+import com.codegym.model.contract.AttachService;
 
 import java.util.List;
 

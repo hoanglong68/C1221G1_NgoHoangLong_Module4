@@ -44,6 +44,7 @@
             </ul>
         </div>
     </div>
+    <i class="fas fa-plus"><a th:href="@{/contract/create-with-detail}">With Detail</a></i>
 </nav>
 <form th:object="${contractDto}" method="post" th:action="@{/contract/create}">
     <fieldset class="w-75 mx-auto">

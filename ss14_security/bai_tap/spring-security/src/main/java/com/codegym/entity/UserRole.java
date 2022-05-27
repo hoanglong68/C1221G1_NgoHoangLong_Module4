@@ -5,9 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 @Data
 @Entity
-@Table(name = "User_Role", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "USER_ROLE_UK", columnNames = {"User_Id", "Role_Id"})})
 public class UserRole {
     @Id
     @GeneratedValue
@@ -16,9 +13,9 @@ public class UserRole {
 
     @ManyToOne
     @JoinColumn(name = "User_Id", nullable = false)
-    private AppUser appUser;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "Role_Id", nullable = false)
-    private AppRole appRole;
+    private Role role;
 }

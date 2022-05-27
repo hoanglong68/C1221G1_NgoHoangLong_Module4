@@ -1,6 +1,6 @@
 package com.codegym.service;
 
-import com.codegym.model.Position;
+import com.codegym.model.employee.Position;
 
 import java.util.List;
 

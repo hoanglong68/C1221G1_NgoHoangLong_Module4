@@ -1,7 +1,6 @@
 package com.codegym.service;
 
-import com.codegym.dto.ContractDetailDto;
-import com.codegym.model.ContractDetail;
+import com.codegym.model.contract.ContractDetail;
 
 public interface IContractDetailService {
     void save(ContractDetail contractDetail);

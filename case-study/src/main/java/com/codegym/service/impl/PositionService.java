@@ -1,6 +1,6 @@
 package com.codegym.service.impl;
 
-import com.codegym.model.Position;
+import com.codegym.model.employee.Position;
 import com.codegym.repository.IPositionRepository;
 import com.codegym.service.IPositionService;
 import org.springframework.beans.factory.annotation.Autowired;

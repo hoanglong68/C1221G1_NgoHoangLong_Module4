@@ -1,15 +1,15 @@
-package com.codegym.entity;
+package com.codegym.model.security;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Data
 @Entity
-@Table(name = "App_Role", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "Role_Name")})
-public class AppRole {
+public class Role {
     @Id
     @GeneratedValue
     @Column(name = "Role_Id", nullable = false)

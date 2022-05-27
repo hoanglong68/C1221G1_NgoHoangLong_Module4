@@ -1,9 +1,8 @@
 package com.codegym.controller;
 
 import com.codegym.dto.CustomerDto;
-import com.codegym.dto.OccupiedCustomerDto;
-import com.codegym.model.Customer;
-import com.codegym.model.CustomerType;
+import com.codegym.model.customer.Customer;
+import com.codegym.model.customer.CustomerType;
 import com.codegym.service.ICustomerService;
 import com.codegym.service.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;

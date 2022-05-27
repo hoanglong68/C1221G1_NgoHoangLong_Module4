@@ -1,6 +1,6 @@
 package com.codegym.service;
 
-import com.codegym.model.Division;
+import com.codegym.model.employee.Division;
 
 import java.util.List;
 

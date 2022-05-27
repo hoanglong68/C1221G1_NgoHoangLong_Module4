@@ -1,6 +1,6 @@
 package com.codegym.service.impl;
 
-import com.codegym.model.CustomerType;
+import com.codegym.model.customer.CustomerType;
 import com.codegym.repository.ICustomerTypeRepository;
 import com.codegym.service.ICustomerTypeService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.codegym.model;
+package com.codegym.model.contract;
 
 import javax.persistence.*;
 

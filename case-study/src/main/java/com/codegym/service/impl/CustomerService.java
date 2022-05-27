@@ -1,7 +1,7 @@
 package com.codegym.service.impl;
 
 import com.codegym.dto.OccupiedCustomerDto;
-import com.codegym.model.Customer;
+import com.codegym.model.customer.Customer;
 import com.codegym.repository.ICustomerRepository;
 import com.codegym.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;

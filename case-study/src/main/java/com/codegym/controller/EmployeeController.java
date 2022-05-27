@@ -1,7 +1,10 @@
 package com.codegym.controller;
 
 import com.codegym.dto.EmployeeDto;
-import com.codegym.model.*;
+import com.codegym.model.employee.Division;
+import com.codegym.model.employee.EducationDegree;
+import com.codegym.model.employee.Employee;
+import com.codegym.model.employee.Position;
 import com.codegym.service.IDivisionService;
 import com.codegym.service.IEducationDegreeService;
 import com.codegym.service.IEmployeeService;

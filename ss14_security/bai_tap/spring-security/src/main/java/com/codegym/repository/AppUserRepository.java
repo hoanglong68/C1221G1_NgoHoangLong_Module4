@@ -1,8 +1,8 @@
 package com.codegym.repository;
 
-import com.codegym.entity.AppUser;
+import com.codegym.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AppUserRepository extends JpaRepository<AppUser, Long> {
-    AppUser findByUserName(String userName);
+public interface AppUserRepository extends JpaRepository<User, Long> {
+    User findByUserName(String userName);
 }

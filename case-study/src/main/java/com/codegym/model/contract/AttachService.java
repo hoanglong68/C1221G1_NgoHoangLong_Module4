@@ -1,4 +1,6 @@
-package com.codegym.model;
+package com.codegym.model.contract;
+
+import com.codegym.model.contract.ContractDetail;
 
 import javax.persistence.*;
 import java.util.List;

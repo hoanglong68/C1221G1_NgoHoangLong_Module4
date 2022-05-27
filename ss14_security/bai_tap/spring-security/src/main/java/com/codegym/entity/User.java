@@ -5,10 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 @Data
 @Entity
-@Table(name = "App_User", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name")})
-public class AppUser {
+public class User {
     @Id
     @GeneratedValue
     @Column(name = "User_Id", nullable = false)

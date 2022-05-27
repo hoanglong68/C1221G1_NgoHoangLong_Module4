@@ -15,17 +15,17 @@ public class ServiceService implements IServiceService {
     IServiceRepository iServiceRepository;
 
     @Override
-    public void save(com.codegym.model.Service service) {
+    public void save(com.codegym.model.service.Service service) {
         iServiceRepository.save(service);
     }
 
     @Override
-    public Page<com.codegym.model.Service> findAllByPage(Pageable pageable) {
+    public Page<com.codegym.model.service.Service> findAllByPage(Pageable pageable) {
         return iServiceRepository.findAll(pageable);
     }
 
     @Override
-    public List<com.codegym.model.Service> findAll() {
+    public List<com.codegym.model.service.Service> findAll() {
         return iServiceRepository.findAll();
     }
 }

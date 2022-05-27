@@ -1,6 +1,6 @@
 package com.codegym.service.impl;
 
-import com.codegym.model.AttachService;
+import com.codegym.model.contract.AttachService;
 import com.codegym.repository.IAttachServiceRepository;
 import com.codegym.service.IAttachServiceService;
 import org.springframework.beans.factory.annotation.Autowired;

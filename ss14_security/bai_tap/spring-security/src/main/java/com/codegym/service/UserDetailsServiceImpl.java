@@ -1,13 +1,12 @@
 package com.codegym.service;
 
-import com.codegym.entity.AppUser;
+import com.codegym.entity.User;
 import com.codegym.entity.UserRole;
 import com.codegym.repository.AppUserRepository;
 import com.codegym.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,29 +26,29 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        AppUser appUser = this.appUserRepository.findByUserName(userName);
+        User user = this.appUserRepository.findByUserName(userName);
 
-        if (appUser == null) {
+        if (user == null) {
             System.out.println("User not found! " + userName);
             throw new UsernameNotFoundException("User " + userName + " was not found in the database");
         }
 
-        System.out.println("Found User: " + appUser);
+        System.out.println("Found User: " + user);
 
         // [ROLE_USER, ROLE_ADMIN,..]
-        List<UserRole> userRoleList = this.userRoleRepository.findByAppUser(appUser);
+        List<UserRole> userRoleList = this.userRoleRepository.findByAppUser(user);
 
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         if (userRoleList != null) {
             for (UserRole userRole : userRoleList) {
                 // ROLE_USER, ROLE_ADMIN,..
-                GrantedAuthority authority = new SimpleGrantedAuthority(userRole.getAppRole().getRoleName());
+                GrantedAuthority authority = new SimpleGrantedAuthority(userRole.getRole().getRoleName());
                 grantList.add(authority);
             }
         }
 
-        UserDetails userDetails = (UserDetails) new User(appUser.getUserName(), //
-                appUser.getEncrytedPassword(), grantList);
+        UserDetails userDetails = (UserDetails) new org.springframework.security.core.userdetails.User(user.getUserName(), //
+                user.getEncrytedPassword(), grantList);
 
         return userDetails;
     }

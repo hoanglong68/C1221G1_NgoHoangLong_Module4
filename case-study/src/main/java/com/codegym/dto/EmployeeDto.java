@@ -1,8 +1,8 @@
 package com.codegym.dto;
 
-import com.codegym.model.Division;
-import com.codegym.model.EducationDegree;
-import com.codegym.model.Position;
+import com.codegym.model.employee.Division;
+import com.codegym.model.employee.EducationDegree;
+import com.codegym.model.employee.Position;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

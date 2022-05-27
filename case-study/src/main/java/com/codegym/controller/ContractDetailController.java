@@ -1,7 +1,8 @@
 package com.codegym.controller;
 
 import com.codegym.dto.ContractDetailDto;
-import com.codegym.model.ContractDetail;
+import com.codegym.model.contract.Contract;
+import com.codegym.model.contract.ContractDetail;
 import com.codegym.service.IAttachServiceService;
 import com.codegym.service.IContractDetailService;
 import com.codegym.service.IContractService;
@@ -30,9 +31,13 @@ public class ContractDetailController {
         model.addAttribute("attachServiceList", this.iAttachServiceService.findAll());
         return "/contract/create-detail";
     }
-    @PostMapping("create-detail")
-    public String doCreateContractDetail( ContractDetailDto contractDetailDto){
+
+    @PostMapping("/create-detail")
+    public String doCreateContractDetail(ContractDetailDto contractDetailDto){
         ContractDetail contractDetail = new ContractDetail();
+        Contract contract = new Contract();
+        BeanUtils.copyProperties(contractDetailDto.getContract(),contract);
+        contractDetail.setContract(contract);
         BeanUtils.copyProperties(contractDetailDto,contractDetail);
         this.iContractDetailService.save(contractDetail);
         return "redirect:/contract/list";

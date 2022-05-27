@@ -1,6 +1,6 @@
 package com.codegym.dto;
 
-import com.codegym.model.CustomerType;
+import com.codegym.model.customer.CustomerType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import javax.validation.constraints.*;

@@ -1,5 +1,7 @@
-package com.codegym.model;
+package com.codegym.model.customer;
 
+
+import com.codegym.model.customer.Customer;
 
 import javax.persistence.*;
 import java.util.List;

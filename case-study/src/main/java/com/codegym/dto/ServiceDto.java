@@ -1,7 +1,7 @@
 package com.codegym.dto;
 
-import com.codegym.model.FacilityType;
-import com.codegym.model.RentType;
+import com.codegym.model.service.FacilityType;
+import com.codegym.model.service.RentType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

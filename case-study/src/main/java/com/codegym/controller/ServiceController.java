@@ -1,7 +1,7 @@
 package com.codegym.controller;
 
 import com.codegym.dto.ServiceDto;
-import com.codegym.model.Service;
+import com.codegym.model.service.Service;
 import com.codegym.service.IFacilityTypeService;
 import com.codegym.service.IRentTypeService;
 import com.codegym.service.IServiceService;

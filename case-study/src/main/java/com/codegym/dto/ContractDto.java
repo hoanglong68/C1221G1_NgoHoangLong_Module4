@@ -1,13 +1,11 @@
 package com.codegym.dto;
 
-import com.codegym.model.Contract;
-import com.codegym.model.Customer;
-import com.codegym.model.Employee;
-import com.codegym.model.Service;
+import com.codegym.model.customer.Customer;
+import com.codegym.model.employee.Employee;
+import com.codegym.model.service.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;

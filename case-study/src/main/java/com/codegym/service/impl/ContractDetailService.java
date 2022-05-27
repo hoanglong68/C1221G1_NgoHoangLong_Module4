@@ -1,6 +1,6 @@
 package com.codegym.service.impl;
 
-import com.codegym.model.ContractDetail;
+import com.codegym.model.contract.ContractDetail;
 import com.codegym.repository.IContractDetailRepository;
 import com.codegym.service.IContractDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,4 +14,5 @@ public class ContractDetailService implements IContractDetailService {
     public void save(ContractDetail contractDetail) {
         iContractDetailRepository.save(contractDetail);
     }
+
 }

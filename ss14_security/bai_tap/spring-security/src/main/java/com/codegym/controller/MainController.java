@@ -73,7 +73,6 @@ public class MainController {
             model.addAttribute("message", message);
 
         }
-
         return "403Page";
     }
 

@@ -1,6 +1,6 @@
 package com.codegym.service.impl;
 
-import com.codegym.model.EducationDegree;
+import com.codegym.model.employee.EducationDegree;
 import com.codegym.repository.IEducationDegreeRepository;
 import com.codegym.service.IEducationDegreeService;
 import org.springframework.beans.factory.annotation.Autowired;

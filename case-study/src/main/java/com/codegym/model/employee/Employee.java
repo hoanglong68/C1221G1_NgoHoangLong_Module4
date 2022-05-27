@@ -1,4 +1,7 @@
-package com.codegym.model;
+package com.codegym.model.employee;
+
+import com.codegym.model.contract.Contract;
+import com.codegym.model.security.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,7 +19,9 @@ public class Employee {
     private String employeeEmail;
     private String employeeAddress;
     private boolean employeeStatus;
-
+    @JoinColumn
+    @OneToOne
+    private User user;
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "positionId")
     private Position position;
