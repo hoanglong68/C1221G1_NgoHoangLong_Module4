@@ -36,6 +36,14 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     List<Contract> contractList;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public List<Contract> getContractList() {
         return contractList;
     }
