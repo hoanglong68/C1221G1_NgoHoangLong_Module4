@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+
+</head>
+<body>
+<form th:object="${productOrderDto}" method="post" th:action="@{/product/edit}">
+    <input type="hidden" th:field="*{productOrderId}">
+    <fieldset class="w-75 mx-auto">
+        <legend class="text-center my-4"><span class="text-secondary">Edit Customer</span></legend>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="quantity" type="text" th:field="*{productOrderQuantity}" />
+            <label class="form-label" for="quantity">Quantity</label>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('productOrderQuantity')}" th:errors="*{productOrderQuantity}" style="color: red"></p>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="buyDate" type="date" th:field="*{productOrderBuyDate}" />
+            <label class="form-label" for="buyDate">Buy Date</label>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('productOrderBuyDate')}" th:errors="*{productOrderBuyDate}" style="color: red"></p>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select th:field="*{product.productType}" class="form-select" aria-label="Disabled select example">
+                <option value="" th:text="--product-type--"></option>
+                <option th:each="type: ${productTypeList}"
+                        th:value="${type.productTypeId}"
+                        th:text="${type.productTypeName}"></option>
+            </select>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('product.productType')}" th:errors="*{product.productType}" style="color: red"></p>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select th:field="*{product}" class="form-select" aria-label="Disabled select example">
+                <option value="0" th:text="--product--"></option>
+                <option th:each="product: ${productList}"
+                        th:value="${product.productId}"
+                        th:text="${product.productName}"></option>
+            </select>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('product')}" th:errors="*{product}" style="color: red"></p>
+        </div>
+    </fieldset>
+    <div class="text-center">
+        <button type="submit" class="btn btn-secondary mt-4 mx-2">Edit !</button>
+        <input class="btn btn-warning me-4" type="reset" value="cancel">
+    </div>
+</form>
+<div class="text-center">
+    <a class="btn btn-light mt-4 " href="/product/list">Back to Product List</a>
+</div>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+
+</body>
+</html>

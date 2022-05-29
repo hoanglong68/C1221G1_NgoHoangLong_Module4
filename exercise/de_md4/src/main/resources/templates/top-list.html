@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Top Product List</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+
+</head>
+<body>
+<h1 class="text-center">Top Product List</h1>
+<div class="container">
+    <table class="table w-75 mx-auto shadow-2-strong">
+        <thead class="table-dark p-3">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Order Code</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Type</th>
+            <th scope="col">Buy Date</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Money</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="productOrder,loop : ${productOrderList}">
+            <th scope="row" th:text="${loop.count}"></th>
+            <td th:text="${productOrder.productOrderId}"></td>
+            <td th:text="${productOrder.product.productName}"></td>
+            <td th:text="${productOrder.product.productPrice}"></td>
+            <td th:text="${productOrder.product.productType.productTypeName}"></td>
+            <td th:text="${productOrder.productOrderBuyDate}"></td>
+            <td th:text="${productOrder.productOrderQuantity}"></td>
+            <td th:text="
+            ${productOrder.productOrderQuantity} * ${productOrder.product.productPrice}
+"></td>
+            <td>
+                <a class="btn btn-warning" th:href="@{/product/edit(id=${productOrder.product.productId})}">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+
+</body>
+</html>
