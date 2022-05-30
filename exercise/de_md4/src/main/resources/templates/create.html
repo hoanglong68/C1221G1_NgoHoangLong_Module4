@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+    <th:block th:replace="~{layout :: top-bootstrap}"></th:block>
+
+</head>
+<body>
+<form th:object="${product}" method="post" th:action="@{/product/create}">
+    <fieldset class="w-75 mx-auto">
+        <legend class="text-center my-4"><span class="text-secondary">Edit Customer</span></legend>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="name" type="text" th:field="*{productName}" />
+            <label class="form-label" for="name">name</label>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" style="color: red"></p>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="price" type="text" th:field="*{productPrice}" />
+            <label class="form-label" for="price">price</label>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('productPrice')}" th:errors="*{productPrice}" style="color: red"></p>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <input class="form-control" id="status" type="text" th:field="*{productStatus}" />
+            <label class="form-label" for="status">status</label>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('productStatus')}" th:errors="*{productStatus}" style="color: red"></p>
+        </div>
+        <div class="form-outline w-25 mx-auto my-4">
+            <select th:field="*{productType}" class="form-select" aria-label="Disabled select example">
+                <option value="" th:text="--product-type--"></option>
+                <option th:each="type: ${productTypeList}"
+                        th:value="${type.productTypeId}"
+                        th:text="${type.productTypeName}"></option>
+            </select>
+        </div>
+        <div class="w-25 mx-auto my-4">
+            <p th:if="${#fields.hasErrors('productType')}" th:errors="*{productType}" style="color: red"></p>
+        </div>
+    </fieldset>
+    <div class="text-center">
+        <button type="submit" class="btn btn-secondary mt-4 mx-2">Edit !</button>
+        <input class="btn btn-warning me-4" type="reset" value="cancel">
+    </div>
+</form>
+<div class="text-center">
+    <a class="btn btn-light mt-4 " href="/product/list">Back to Product List</a>
+</div>
+<th:block th:replace="~{layout :: bot-bootstrap}"></th:block>
+
+</body>
+</html>

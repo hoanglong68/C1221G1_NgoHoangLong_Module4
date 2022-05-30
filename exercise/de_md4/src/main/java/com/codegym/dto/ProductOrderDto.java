@@ -3,17 +3,14 @@ package com.codegym.dto;
 import com.codegym.model.Product;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import java.time.LocalDate;
 
 public class ProductOrderDto implements Validator {
     private Integer productOrderId;
-    @NotEmpty(message = "do not empty !")
     private String productOrderBuyDate;
-    @NotEmpty(message = "do not empty !")
+    @Positive(message = "Must be positive number !")
     private String productOrderQuantity;
-    @NotNull(message = "pls confirm product !")
     private Product product;
 
     public Integer getProductOrderId() {
@@ -55,6 +52,16 @@ public class ProductOrderDto implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-
+        ProductOrderDto productOrderDto = (ProductOrderDto) target;
+        if ("".equals(productOrderDto.productOrderBuyDate)){
+            errors.rejectValue("productOrderBuyDate","day.checkEmpty","giảng làm !");
+        }
+        try{
+            if (!LocalDate.parse(productOrderDto.productOrderBuyDate).isAfter(LocalDate.now())){
+                errors.rejectValue("productOrderBuyDate","day.checkDate","giảng làm !");
+            }
+        }catch (Exception e){
+            errors.rejectValue("productOrderBuyDate","day.valid","giảng làm !");
+        }
     }
 }

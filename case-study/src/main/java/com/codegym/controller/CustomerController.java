@@ -102,4 +102,5 @@ public class CustomerController {
         model.addAttribute("occupiedList",this.iCustomerService.findAllOcc());
         return "customer/occ-list";
     }
+
 }

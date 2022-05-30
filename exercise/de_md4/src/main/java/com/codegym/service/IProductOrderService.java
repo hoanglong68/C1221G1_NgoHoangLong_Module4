@@ -12,7 +12,7 @@ public interface IProductOrderService {
 
     Page<ProductOrder> findAllByBuyDate(String beforeBuyDate,String afterBuyDate,Pageable pageable);
 
-    List<ProductOrder> findTop(String limitPage);
+    Page<ProductOrder> findTopTotalMoney(Pageable pageable);
 
     ProductOrder findById(String idProduct);
 

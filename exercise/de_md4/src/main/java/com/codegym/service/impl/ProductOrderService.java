@@ -25,17 +25,17 @@ public class ProductOrderService implements IProductOrderService {
         if (!"".equals(beforeBuyDate) && !"".equals(afterBuyDate)) {
             return productOrderRepository.findAllByProductOrderBuyDateBetween(beforeBuyDate, afterBuyDate, pageable);
         } else if ("".equals(beforeBuyDate) && !"".equals(afterBuyDate)) {
-            return productOrderRepository.findAllByProductOrderBuyDateAfter(afterBuyDate, pageable);
+            return productOrderRepository.findAllByProductOrderBuyDateBefore(afterBuyDate, pageable);
         } else if (!"".equals(beforeBuyDate) && "".equals(afterBuyDate)) {
-            return productOrderRepository.findAllByProductOrderBuyDateBefore(beforeBuyDate, pageable);
+            return productOrderRepository.findAllByProductOrderBuyDateAfter(beforeBuyDate, pageable);
         } else {
             return productOrderRepository.findAll(pageable);
         }
     }
 
     @Override
-    public List<ProductOrder> findTop(String limitPage) {
-        return productOrderRepository.findTopTotalMoney(Integer.parseInt(limitPage));
+    public Page<ProductOrder> findTopTotalMoney(Pageable pageable) {
+        return productOrderRepository.findTopTotalMoney(pageable);
     }
 
     @Override

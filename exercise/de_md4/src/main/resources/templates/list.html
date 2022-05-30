@@ -23,13 +23,16 @@
         </div>
     </div>
 </form>
-<form action="/product/show-top">
+<form action="/product/list">
+    <input type="hidden" name="sort" th:value="desc">
     <div class="row container justify-content-center">
         <div class="form-outline my-2 col-2 mx-2">
-            <select id="limit" class="form-select" name="limit">
+            <select id="limit" class="form-select" name="pageSize">
                 <option value="">--top--</option>
                 <option th:value="10">top 10</option>
                 <option th:value="5">top 5</option>
+                <option th:value="3">top 3</option>
+                <option th:value="2">top 2</option>
                 <option th:value="1">top 1</option>
             </select>
             <span>product order has total money highest !</span>

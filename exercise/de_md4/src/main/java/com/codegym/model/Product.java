@@ -1,13 +1,18 @@
 package com.codegym.model;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.List;
 
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer productId;
+    @GeneratedValue(generator = "id-generator")
+    @GenericGenerator(name = "id-generator",parameters = @Parameter(name = "prefix",value = "p"),strategy = "com.codegym.util.IdentityCodeGenerator")
+    private String productId;
     private String productName;
     @Column(columnDefinition = "DOUBLE")
     private String productPrice;
@@ -27,8 +32,12 @@ public class Product {
         this.productOrderList = productOrderList;
     }
 
-    public Integer getProductId() {
+    public String getProductId() {
         return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getProductPrice() {
@@ -47,9 +56,6 @@ public class Product {
         this.productStatus = productStatus;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
 
     public String getProductName() {
         return productName;

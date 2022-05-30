@@ -38,7 +38,7 @@
         </div>
         <div class="form-outline w-25 mx-auto my-4">
             <select th:field="*{product}" class="form-select" aria-label="Disabled select example">
-                <option value="0" th:text="--product--"></option>
+                <option value="" th:text="--product--"></option>
                 <option th:each="product: ${productList}"
                         th:value="${product.productId}"
                         th:text="${product.productName}"></option>

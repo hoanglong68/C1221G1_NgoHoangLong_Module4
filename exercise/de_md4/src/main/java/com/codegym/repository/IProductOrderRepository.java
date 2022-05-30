@@ -6,13 +6,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
-
 public interface IProductOrderRepository extends JpaRepository<ProductOrder,Integer> {
     Page<ProductOrder> findAllByProductOrderBuyDateBetween(String beforeBuyDate, String afterBuyDate, Pageable pageable);
     Page<ProductOrder> findAllByProductOrderBuyDateBefore(String beforeBuyDate, Pageable pageable);
     Page<ProductOrder> findAllByProductOrderBuyDateAfter(String afterBuyDate, Pageable pageable);
-    @Query(value = "select * from product_order p_o inner join product p on p_o.product_id = p.product_id group by p_o.product_order_id order by p_o.product_order_quantity * p.product_price desc limit :limitPage",
+    @Query(value = "select product_order_id, product_order_buy_date, product_order_quantity,  p.product_id, product_name, product_price, product_status, product_type_id,\n" +
+            "       (po.product_order_quantity * p.product_price) as total\n" +
+            "from product_order po inner join product p\n" +
+            "on po.product_id = p.product_id\n" +
+            "group by po.product_order_id\n" +
+            "order by total desc",
+            countQuery = "select product_order_id, product_order_buy_date, product_order_quantity,  p.product_id, product_name, product_price, product_status, product_type_id,\n" +
+                    "       (po.product_order_quantity * p.product_price) as total\n" +
+                    "from product_order po inner join product p\n" +
+                    "on po.product_id = p.product_id\n" +
+                    "group by po.product_order_id\n" +
+                    "order by total desc",
             nativeQuery = true)
-    List<ProductOrder> findTopTotalMoney(Integer limitPage);
+
+    Page<ProductOrder> findTopTotalMoney(Pageable pageable);
 }
